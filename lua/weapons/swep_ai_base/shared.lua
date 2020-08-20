@@ -44,7 +44,7 @@ SWEP.Primary.NextBurst 			= 0 --This value is used to store the next server time
 SWEP.Primary.AimDelayMin		= 0 --How long should we wait before shooting a new enemy, at minimum?
 SWEP.Primary.AimDelayMax		= 0 --How long should we wait before shooting a new enemy, at maximum?
 SWEP.Primary.Sound				= "weapons/pistol/pistol_fire2.wav" --What sound should we play when the gun fires?
-SWEP.Primary.Ammo				= "pistol" --The ammo type of the weapon, for giving ammo to players on pickup.
+SWEP.Primary.Ammo				= "pistol" --Since NPCs have infinite ammo, this value is not important and should just be left alone.
 SWEP.Primary.InfiniteAmmo		= false --Should we never have to reload?
 
 SWEP.CurrentEnemy				= nil --This value is used to store the owners last enemy, don't touch it.
@@ -296,7 +296,8 @@ function SWEP:CanPrimaryFire()
 end
 
 function SWEP:GetCapabilities()
-	return 64 --Prevents weapons from firing animation events (e.g. built-in HL2 guns muzzleflash & shell casings)
+	--Prevents weapons from firing animation events (e.g. built-in HL2 guns muzzleflash & shell casings)
+	return 64
 end
 
 function SWEP:PrimaryAttack()
@@ -307,18 +308,6 @@ function SWEP:SecondaryAttack()
 	return
 end
 
-function SWEP:CanBePickedUpByNPCs()
-	return true
+function SWEP:OnDrop()
+	self:Remove()
 end
-
-hook.Add("PlayerCanPickupWeapon", "pickup_ai_weapon", function(ply, wep)
-
-	if string.StartWith(wep:GetClass(), "swep_ai_") then
-
-		ply:GiveAmmo(wep.Primary.ClipSize, wep.Primary.Ammo)
-		wep:Remove()
-		return false
-
-	end
-
-end)
