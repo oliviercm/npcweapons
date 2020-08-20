@@ -1,0 +1,25 @@
+"Unlittwotexture"
+{
+	"$basetexture" "models/Weapons/V_5mg3/RedDot"
+	"$texture2"	"models/Weapons/V_5mg3/noise"
+	"$additive" 1
+	"$model" 1
+	
+
+	"Proxies"
+	{
+
+		"TextureScroll"
+		{
+			"texturescrollvar" "$texture2transform"
+			"texturescrollrate" 4
+			"texturescrollangle" -50
+		}
+
+
+	}
+
+
+
+
+}

@@ -1,0 +1,62 @@
+DEFINE_BASECLASS("swep_ai_base")
+
+--[[
+--ROCKET LAUNCHER
+--]]
+
+SWEP.WorldModel					= "models/weapons/w_rocket_launcher.mdl"
+SWEP.HoldType					= "rpg"
+
+SWEP.MuzzleEffect    			= "MuzzleEffect"
+SWEP.ShellEffect				= ""
+SWEP.TracerEffect				= ""
+SWEP.ShowShellEffect    		= false
+
+SWEP.Primary.DamageMin			= 60
+SWEP.Primary.DamageMax			= 60
+SWEP.Primary.Force				= 0
+SWEP.Primary.Spread				= 1
+SWEP.Primary.SpreadMoveMult		= NPC_WEAPONS_SPREAD_MOVE_MULT_NONE
+SWEP.Primary.BurstMinShots		= 1
+SWEP.Primary.BurstMaxShots		= 1
+SWEP.Primary.BurstMinDelay		= 0
+SWEP.Primary.BurstMaxDelay		= 0
+SWEP.Primary.FireDelay			= 0
+SWEP.Primary.NumBullets			= 1
+SWEP.Primary.ClipSize			= 1
+SWEP.Primary.DefaultClip		= 1
+SWEP.Primary.AimDelayMin		= NPC_WEAPONS_MIN_AIM_DELAY_HIGH
+SWEP.Primary.AimDelayMax		= NPC_WEAPONS_MAX_AIM_DELAY_HIGH
+SWEP.Primary.Sound				= "swep_ai_rocketlauncher_fire"
+
+SWEP.ExplosionRadius			= 384
+SWEP.RocketSpeed				= 700
+SWEP.RocketAcceleration			= 300
+
+function SWEP:Shoot()
+
+	local owner = self.Owner
+	local muzzlePos = self.Weapon:GetAttachment(self.MuzzleAttachment).Pos
+	local targetPos = owner:GetEnemy():WorldSpaceCenter()
+	local inaccuracy = self.Primary.Spread
+	local shootAngle = Vector(targetPos.x - muzzlePos.x, targetPos.y - muzzlePos.y, targetPos.z - muzzlePos.z):Angle()
+	shootAngle.p = shootAngle.p + math.Rand(-inaccuracy, inaccuracy)
+	shootAngle.y = shootAngle.y + math.Rand(-inaccuracy, inaccuracy)
+	
+	local rocket = ents.Create("ai_rocket_projectile")
+	rocket:SetPos(muzzlePos)
+	rocket:SetAngles(shootAngle)
+	rocket:SetOwner(owner)
+	rocket.Damage = math.random(self.Primary.DamageMin, self.Primary.DamageMax)
+	rocket.Speed = self.RocketSpeed
+	rocket.Acceleration = self.RocketAcceleration
+	rocket.ExplosionRadius = self.ExplosionRadius
+	rocket.Owner = owner
+	
+	rocket:Spawn()
+	
+	self:ShootEffects()
+	
+	self:TakePrimaryAmmo(1)
+	
+end

@@ -1,0 +1,11 @@
+{
+	"title"		:	"NPC Weapons",
+	"type"		:	"weapon",
+	"tags"		:	[ "fun", "realism" ],
+	"ignore"	:
+	[
+		"*.psd",
+		"*.vcproj",
+		"*.svn*"
+	]
+}
