@@ -40,8 +40,9 @@ SWEP.ProjectileHitSound			= "weapons/crossbow/bolt_skewer1.wav"
 function SWEP:Shoot()
 
 	local owner = self.Owner
-	local muzzlePos = owner:WorldSpaceCenter()
-	local targetPos = owner:GetEnemy():WorldSpaceCenter()
+	local enemy = owner:GetEnemy()
+	local targetPos = enemy:WorldSpaceCenter()
+	local muzzlePos = owner:GetPos():Distance(enemy:GetPos()) > 128 and self.Weapon:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
 	local inaccuracy = self.Primary.Spread
 	local shootAngle = Vector(targetPos.x - muzzlePos.x, targetPos.y - muzzlePos.y, targetPos.z - muzzlePos.z):Angle()
 	shootAngle.p = shootAngle.p + math.Rand(-inaccuracy, inaccuracy)
