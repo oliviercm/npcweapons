@@ -227,13 +227,12 @@ function SWEP:Think()
 			local enemyVisible = enemy:Visible(owner)
 			
 			if enemy ~= self.CurrentEnemy or not enemyVisible then
-			
-				local aimtime = math.Rand(self.Primary.AimDelayMin, self.Primary.AimDelayMax)
-				
-				if self.Primary.NextBurst <= curtime + aimtime then
-					
+
+				if self.Primary.NextBurst <= curtime + self.Primary.AimDelayMax then
+
+					local aimtime = math.Rand(self.Primary.AimDelayMin, self.Primary.AimDelayMax)
 					self.Primary.NextBurst = curtime + aimtime
-					
+	
 				end
 				
 				self.CurrentEnemy = enemy
@@ -247,10 +246,13 @@ function SWEP:Think()
 			end
 			
 		else
+			
+			if self.Primary.NextBurst <= curtime + self.Primary.AimDelayMax then
 
-			local aimtime = math.Rand(self.Primary.AimDelayMin, self.Primary.AimDelayMax)
-				
-			self.Primary.NextBurst = curtime + aimtime
+				local aimtime = math.Rand(self.Primary.AimDelayMin, self.Primary.AimDelayMax)
+				self.Primary.NextBurst = curtime + aimtime
+
+			end
 
 		end
 		
