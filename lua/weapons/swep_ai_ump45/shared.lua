@@ -13,6 +13,8 @@ SWEP.TracerEffect				= "Tracer"
 
 SWEP.Primary.DamageMin			= 6
 SWEP.Primary.DamageMax			= 8
+SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_SMG
+SWEP.Primary.MaxDropoffDistance	= NPC_WEAPONS_MAX_DROPOFF_DISTANCE_SMG
 SWEP.Primary.Force				= 7
 SWEP.Primary.Spread				= 0.043
 SWEP.Primary.SpreadMoveMult		= NPC_WEAPONS_SPREAD_MOVE_MULT_NONE

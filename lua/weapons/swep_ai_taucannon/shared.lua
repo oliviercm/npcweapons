@@ -14,6 +14,8 @@ SWEP.EnableShellEffect			= false
 
 SWEP.Primary.DamageMin			= 10
 SWEP.Primary.DamageMax			= 20
+SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_RIFLE
+SWEP.Primary.MaxDropoffDistance	= NPC_WEAPONS_MAX_DROPOFF_DISTANCE_RIFLE
 SWEP.Primary.Force				= 12
 SWEP.Primary.Spread				= 0.029
 SWEP.Primary.SpreadMoveMult		= NPC_WEAPONS_SPREAD_MOVE_MULT_NONE
