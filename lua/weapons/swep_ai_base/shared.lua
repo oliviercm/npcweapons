@@ -25,6 +25,7 @@ SWEP.TracerX					= 1 --For every X bullets, show the tracer effect.
 SWEP.EnableMuzzleEffect    		= true --Enable muzzleflash?
 SWEP.EnableShellEffect    		= true --Enable shell casings?
 
+SWEP.ReloadTime					= 0 --How long should reloads last in seconds? NPCs will not be able to fire for this much time after starting a reload.
 SWEP.Primary.DamageMin			= 0 --How much minimum damage each bullet should do. Rule of thumb is average damage should be around 4-8 for small caliber weapons like pistols, 8-12 for medium caliber weapons like rifles, and 15+ for large caliber weapons like sniper rifles.
 SWEP.Primary.DamageMax			= 0 --How much minimum damage each bullet should do. Rule of thumb is average damage should be around 4-8 for small caliber weapons like pistols, 8-12 for medium caliber weapons like rifles, and 15+ for large caliber weapons like sniper rifles.
 SWEP.Primary.MinDropoffDistance = 0 --The minimum distance before damage begins to drop off.
@@ -241,6 +242,7 @@ function SWEP:Think()
 		local ownerActivity = owner:GetActivity()
 		if ownerActivity == ACT_RELOAD and self.LastActivity ~= ACT_RELOAD then
 
+			self:SetNextPrimaryFireReload()
 			self:EmitReloadEffects()
 			self:EmitReloadSounds()
 
@@ -304,6 +306,17 @@ function SWEP:CanPrimaryFire()
 	end
 	
 	return true
+
+end
+
+function SWEP:SetNextPrimaryFireReload()
+
+	local reloadtime = CurTime() + self.ReloadTime
+	if self:GetNextPrimaryFire() <= reloadtime then
+
+		self:SetNextPrimaryFire(reloadtime)
+
+	end
 
 end
 
