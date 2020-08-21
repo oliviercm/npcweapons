@@ -36,9 +36,10 @@ function ENT:PhysicsCollide(data, physobj)
 	if IsValid(hitEnt) and IsValid(hitEnt:GetPhysicsObject()) then
 
 		local dmginfo = DamageInfo()
-		if IsValid(self.Owner) then
+		local owner = self:GetOwner()
+		if IsValid(owner) then
 			
-			dmginfo:SetAttacker(self.Owner)
+			dmginfo:SetAttacker(owner)
 			
 		else
 		
