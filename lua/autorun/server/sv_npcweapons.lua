@@ -24,6 +24,10 @@ NPC_WEAPONS_SPREAD_MOVE_MULT_MED = 1.2
 NPC_WEAPONS_SPREAD_MOVE_MULT_HIGH = 1.4
 NPC_WEAPONS_SPREAD_MOVE_MULT_VHIGH = 5.0
 
+NPC_WEAPONS_RELOAD_TIME_LOW = 1.6
+NPC_WEAPONS_RELOAD_TIME_MED = 2.0
+NPC_WEAPONS_RELOAD_TIME_HIGH = 2.4
+
 swepAiBaseHasHeadBoneTable = swepAiBaseHasHeadBoneTable or {}
 swepAiBaseHasHeadBoneTable["npc_combine_s"] = true
 swepAiBaseHasHeadBoneTable["npc_citizen"] = true
