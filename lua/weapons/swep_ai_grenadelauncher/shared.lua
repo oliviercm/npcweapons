@@ -31,8 +31,8 @@ SWEP.Primary.Sound				= "swep_ai_grenadelauncher_fire"
 
 function SWEP:Shoot()
 
-	local owner = self.Owner
-	local muzzlePos = self.Weapon:GetAttachment(self.MuzzleAttachment).Pos
+	local owner = self:GetOwner()
+	local muzzlePos = self:GetAttachment(self.MuzzleAttachment).Pos
 	local targetPos = owner:GetEnemy():WorldSpaceCenter()
 	local dist = (targetPos - muzzlePos):Length()
 	
