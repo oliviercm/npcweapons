@@ -46,6 +46,8 @@ SWEP.Primary.Sound				= "weapons/pistol/pistol_fire2.wav" --What sound should we
 SWEP.Primary.Ammo				= "pistol" --Since NPCs have infinite ammo, this value is not important and should just be left alone.
 SWEP.Primary.InfiniteAmmo		= false --Should we never have to reload?
 
+SWEP.ForceWalking				= false --Should NPCs be forced to walk when holding this weapon?
+
 SWEP.CurrentEnemy				= nil --This value is used to store the owners last enemy, don't touch it.
 
 function SWEP:Initialize()
@@ -201,6 +203,12 @@ function SWEP:Think()
 	
 	local owner = self:GetOwner()
 	if IsValid(owner) then
+
+		if self.ForceWalking then
+			
+			owner:SetMovementActivity(ACT_WALK)
+
+		end
 		
 		local enemy = owner:GetEnemy()
 		if IsValid(enemy) then
