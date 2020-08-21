@@ -20,7 +20,7 @@ SWEP.ShellAttachment			= "2" --Where the bullet casing should come out of on the
 SWEP.MuzzleEffect    			= "MuzzleEffect" --Which effect to use as the muzzleflash.
 SWEP.ShellEffect				= "ShellEject" --Which effect to use as the bullet casing.
 SWEP.TracerEffect				= "Tracer" --Which effect to use as the bullet tracer.
-SWEP.ReloadSound				= "weapons/pistol/pistol_reload1.wav" --What sound should we play when the gun is being reloaded?
+SWEP.ReloadSounds				= nil --Which sounds should we play when the gun is being reloaded? Should be a matrix of {delay, sound}, eg. {{0, "ak47_clipout"}, {0.8, "ak47_clipin"}}
 SWEP.TracerX					= 1 --For every X bullets, show the tracer effect.
 SWEP.EnableMuzzleEffect    		= true --Enable muzzleflash?
 SWEP.EnableShellEffect    		= true --Enable shell casings?
@@ -191,9 +191,27 @@ function SWEP:ShootEffects()
 
 end
 
-function SWEP:ReloadEffects()
+function SWEP:EmitReloadEffects()
 	
-	self:EmitSound(self.ReloadSound)
+	return
+
+end
+
+function SWEP:EmitReloadSounds()
+	
+	for k, v in pairs(self.ReloadSounds) do
+
+		timer.Simple(v[1], function()
+
+			if IsValid(self) and IsValid(self:GetOwner()) then
+	
+				self:EmitSound(v[2])
+	
+			end
+	
+		end)
+
+	end
 
 end
 
@@ -221,7 +239,8 @@ function SWEP:Think()
 		local ownerActivity = owner:GetActivity()
 		if ownerActivity == ACT_RELOAD and self.LastActivity ~= ACT_RELOAD then
 
-			self:ReloadEffects()
+			self:EmitReloadEffects()
+			self:EmitReloadSounds()
 
 		end
 		self.LastActivity = ownerActivity
