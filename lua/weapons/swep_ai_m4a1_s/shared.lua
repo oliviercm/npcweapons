@@ -8,7 +8,7 @@ SWEP.WorldModel					= "models/weapons/w_rif_m4a1_silencer.mdl"
 SWEP.HoldType					= "ar2"
 
 SWEP.MuzzleEffect    			= "MuzzleEffect"
-SWEP.ShellEffect				= "ShellEject"
+SWEP.ShellEffect				= "RifleShellEject"
 SWEP.TracerEffect				= "Tracer"
 
 SWEP.Primary.DamageMin			= 7

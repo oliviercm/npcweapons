@@ -8,7 +8,7 @@ SWEP.WorldModel					= "models/weapons/w_mach_m249para.mdl"
 SWEP.HoldType					= "smg"
 
 SWEP.MuzzleEffect    			= "MuzzleEffect"
-SWEP.ShellEffect				= "ShellEject"
+SWEP.ShellEffect				= "RifleShellEject"
 SWEP.TracerEffect				= "Tracer"
 
 SWEP.Primary.DamageMin			= 5

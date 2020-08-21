@@ -8,7 +8,7 @@ SWEP.WorldModel					= "models/weapons/w_snip_sg550.mdl"
 SWEP.HoldType					= "ar2"
 
 SWEP.MuzzleEffect    			= "MuzzleEffect"
-SWEP.ShellEffect				= "ShellEject"
+SWEP.ShellEffect				= "RifleShellEject"
 SWEP.TracerEffect				= "Tracer"
 
 SWEP.Primary.DamageMin			= 17
