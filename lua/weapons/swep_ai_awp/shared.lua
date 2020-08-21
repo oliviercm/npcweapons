@@ -65,4 +65,16 @@ function SWEP:ShootEffects()
 
 	end)
 
+	local muzzleEffect = EffectData()
+	local muzzleAttach = self:GetAttachment(self.MuzzleAttachment)
+	muzzleEffect:SetEntity(self)
+	muzzleEffect:SetOrigin(muzzleAttach.Pos)
+	muzzleEffect:SetAngles(muzzleAttach.Ang)
+	muzzleEffect:SetScale(1)
+	muzzleEffect:SetMagnitude(1)
+	muzzleEffect:SetRadius(1)
+	util.Effect(self.MuzzleEffect, muzzleEffect)
+	
+	self:GetOwner():MuzzleFlash()
+
 end
