@@ -140,6 +140,7 @@ npcWeaponsRandomRifle = npcWeaponsRandomRifle or
 npcWeaponsRandomShotgun = npcWeaponsRandomShotgun or
 {
 	"swep_ai_doublebarrel",
+	"swep_ai_shotgun",
 	"swep_ai_m3",
 	"swep_ai_xm1014",
 }
@@ -164,16 +165,49 @@ npcWeaponsRandomSniper = npcWeaponsRandomSniper or
 	"swep_ai_sg550",
 	"swep_ai_sniper",
 }
-npcWeaponsRandomHL2Overwatch = npcWeaponsRandomHL2Overwatch or
+npcWeaponsRandomHL2 = npcWeaponsRandomHL2 or
 {
+	"swep_ai_annabelle",
 	"swep_ai_ar2",
-	"swep_ai_smg1",
-	"swep_ai_shotgun",
-}
-npcWeaponsRandomHL2Resistance = npcWeaponsRandomHL2Resistance or
-{
-	"swep_ai_ar2",
-	"swep_ai_smg1",
-	"swep_ai_shotgun",
+	"swep_ai_ar3",
+	"swep_ai_automaticpistol",
+	"swep_ai_crossbow",
+	"swep_ai_magnum",
 	"swep_ai_pistol",
+	"swep_ai_shotgun",
+	"swep_ai_smg1",
+	"swep_ai_smg2",
+	"swep_ai_smg3",
+	"swep_ai_sniper",
+	"swep_ai_taucannon",
+}
+npcWeaponsRandomCSS = npcWeaponsRandomCSS or
+{
+	"swep_ai_ak47",
+	"swep_ai_aug",
+	"swep_ai_awp",
+	"swep_ai_deagle",
+	"swep_ai_elite",
+	"swep_ai_elites",
+	"swep_ai_famas",
+	"swep_ai_fiveseven",
+	"swep_ai_g3sg1",
+	"swep_ai_galil",
+	"swep_ai_glock",
+	"swep_ai_m3",
+	"swep_ai_m4a1",
+	"swep_ai_m4a1_s",
+	"swep_ai_m249",
+	"swep_ai_mac10",
+	"swep_ai_mp5",
+	"swep_ai_p90",
+	"swep_ai_p228",
+	"swep_ai_scout",
+	"swep_ai_sg550",
+	"swep_ai_sg552",
+	"swep_ai_tmp",
+	"swep_ai_ump45",
+	"swep_ai_usp",
+	"swep_ai_usp_s",
+	"swep_ai_xm1014",
 }

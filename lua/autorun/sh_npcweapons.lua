@@ -62,6 +62,8 @@ list.Add("NPCUsableWeapons", {class = "swep_ai_random_rifle", title = "[NPCW] [R
 list.Add("NPCUsableWeapons", {class = "swep_ai_random_shotgun", title = "[NPCW] [RANDOM] SHOTGUN"})
 list.Add("NPCUsableWeapons", {class = "swep_ai_random_smg", title = "[NPCW] [RANDOM] SMG"})
 list.Add("NPCUsableWeapons", {class = "swep_ai_random_sniper", title = "[NPCW] [RANDOM] SNIPER"})
+list.Add("NPCUsableWeapons", {class = "swep_ai_random_hl2", title = "[NPCW] [RANDOM] HALF-LIFE"})
+list.Add("NPCUsableWeapons", {class = "swep_ai_random_css", title = "[NPCW] [RANDOM] COUNTER-STRIKE"})
 
 -----------------
 --SOUND SCRIPTS--

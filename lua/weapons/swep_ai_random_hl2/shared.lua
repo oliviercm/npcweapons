@@ -1,4 +1,4 @@
-SWEP.WeaponList					= npcWeaponsRandomHL2Overwatch
+SWEP.WeaponList					= npcWeaponsRandomHL2
 
 function SWEP:Initialize()
 	

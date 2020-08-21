@@ -1,4 +1,4 @@
-SWEP.WeaponList					= npcWeaponsRandomHL2Resistance
+SWEP.WeaponList					= npcWeaponsRandomCSS
 
 function SWEP:Initialize()
 	
