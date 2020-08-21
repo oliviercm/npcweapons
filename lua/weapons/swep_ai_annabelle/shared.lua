@@ -10,7 +10,7 @@ SWEP.HoldType					= "ar2"
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "ShotgunShellEject"
 SWEP.TracerEffect				= "Tracer"
-SWEP.ReloadSounds				= {{0.2, "swep_ai_shotgun_reload_3"}, {0.8, "swep_ai_shotgun_reload_3"}, {1.6, "swep_ai_shotgun_cock"}}
+SWEP.ReloadSounds				= {{0.2, "swep_ai_shotgun_reload_3"}, {0.8, "swep_ai_shotgun_reload_3"}, {1.6, "swep_ai_shotgun_reload_cock"}}
 
 SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_MED
 SWEP.Primary.DamageMin			= 19
@@ -23,7 +23,7 @@ SWEP.Primary.SpreadMoveMult		= NPC_WEAPONS_SPREAD_MOVE_MULT_MED
 SWEP.Primary.BurstMinShots		= 1
 SWEP.Primary.BurstMaxShots		= 1
 SWEP.Primary.BurstMinDelay		= 0
-SWEP.Primary.BurstMaxDelay		= 0.1
+SWEP.Primary.BurstMaxDelay		= 0.2
 SWEP.Primary.FireDelay			= 0.4
 SWEP.Primary.NumBullets			= 1
 SWEP.Primary.ClipSize			= 2
