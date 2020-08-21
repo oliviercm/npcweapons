@@ -35,32 +35,22 @@ function ENT:PhysicsCollide(data, physobj)
 	
 	if IsValid(hitEnt) and IsValid(hitEnt:GetPhysicsObject()) then
 
-		local cl = hitEnt:GetClass()
-	
-		if cl == "npc_strider" or cl == "npc_helicopter" or cl == "npc_combinedropship" or cl == "npc_combinegunship" or cl == "npc_turret_floor" then
-		
-			hitEnt:TakeDamage(damage, self.Owner, self.Owner)
-		
+		local dmginfo = DamageInfo()
+		if IsValid(self.Owner) then
+			
+			dmginfo:SetAttacker(self.Owner)
+			
 		else
 		
-			local dmginfo = DamageInfo()
-			if IsValid(self.Owner) then
-				
-				dmginfo:SetAttacker(self.Owner)
-				
-			else
-			
-				dmginfo:SetAttacker(self)
-			
-			end
-			dmginfo:SetDamage(self.Damage)
-			dmginfo:SetDamageForce(self:GetForward() * self.Force)
-			dmginfo:SetDamageType(self.DamageType)
-			dmginfo:SetDamagePosition(data.HitPos)
-			
-			hitEnt:TakeDamageInfo(dmginfo)
-			
+			dmginfo:SetAttacker(self)
+		
 		end
+		dmginfo:SetDamage(self.Damage * GetConVar("npc_weapons_damage_mult"):GetFloat())
+		dmginfo:SetDamageForce(self:GetForward() * self.Force)
+		dmginfo:SetDamageType(self.DamageType)
+		dmginfo:SetDamagePosition(data.HitPos)
+
+		hitEnt:TakeDamageInfo(dmginfo)
 		
 	end
 	

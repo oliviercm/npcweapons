@@ -45,7 +45,7 @@ function ENT:PhysicsCollide(data, physobj)
 			
 			local victimPos = v:WorldSpaceCenter()
 			local distance = projPos:Distance(victimPos)
-			local maxDamage = self.Damage
+			local maxDamage = self.Damage * GetConVar("npc_weapons_damage_mult"):GetFloat()
 			local damage = Lerp(distance / radius, maxDamage, 0)
 			
 			local vcl = v:GetClass()
