@@ -39,13 +39,13 @@ function SWEP:ShootEffects()
 
 		if IsValid(self) and IsValid(self:GetOwner()) then
 
-			sound.Play(self.Primary.BoltSound, self.Weapon:GetPos(), SNDLVL_NORM)
+			sound.Play(self.Primary.BoltSound, self:GetPos(), SNDLVL_NORM)
 			
 			timer.Simple(0.333, function()
 
 				if IsValid(self) and IsValid(self:GetOwner()) then
 
-					sound.Play(self.Primary.BoltSound, self.Weapon:GetPos(), SNDLVL_NORM)
+					sound.Play(self.Primary.BoltSound, self:GetPos(), SNDLVL_NORM)
 
 				end
 				

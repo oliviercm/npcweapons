@@ -39,7 +39,7 @@ function SWEP:ShootEffects()
 
 		if IsValid(self) and IsValid(self:GetOwner()) then
 
-			sound.Play(self.Primary.BoltSound, self.Weapon:GetPos(), SNDLVL_NORM)
+			sound.Play(self.Primary.BoltSound, self:GetPos(), SNDLVL_NORM)
 			
 			local shellEffect = EffectData()
 			local shellAttach = self:GetAttachment(self.ShellAttachment)
