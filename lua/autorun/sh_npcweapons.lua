@@ -67,8 +67,8 @@ list.Add("NPCUsableWeapons", {class = "swep_ai_random_sniper", title = "[NPCW] [
 --SOUND SCRIPTS--
 -----------------
 
-local SNDLVL_GUNFIRE = 80
-local SNDLVL_NORM = 65
+local SNDLVL_GUNFIRE = SNDLVL_80dB
+local SNDLVL_NORM = SNDLVL_65dB
 local PITCH_GUNFIRE = {95, 105}
 local PITCH_NORM = 100
 

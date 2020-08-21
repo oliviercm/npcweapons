@@ -20,6 +20,7 @@ SWEP.ShellAttachment			= "2" --Where the bullet casing should come out of on the
 SWEP.MuzzleEffect    			= "MuzzleEffect" --Which effect to use as the muzzleflash.
 SWEP.ShellEffect				= "ShellEject" --Which effect to use as the bullet casing.
 SWEP.TracerEffect				= "Tracer" --Which effect to use as the bullet tracer.
+SWEP.ReloadSound				= "weapons/pistol/pistol_reload1.wav" --What sound should we play when the gun is being reloaded?
 SWEP.TracerX					= 1 --For every X bullets, show the tracer effect.
 SWEP.EnableMuzzleEffect    		= true --Enable muzzleflash?
 SWEP.EnableShellEffect    		= true --Enable shell casings?
@@ -48,7 +49,8 @@ SWEP.Primary.InfiniteAmmo		= false --Should we never have to reload?
 
 SWEP.ForceWalking				= false --Should NPCs be forced to walk when holding this weapon?
 
-SWEP.CurrentEnemy				= nil --This value is used to store the owners last enemy, don't touch it.
+SWEP.LastEnemy					= nil --This value is used to store the owners last enemy, don't touch it.
+SWEP.LastActivity				= nil --This value is used to store the owners last activity, don't touch it.
 
 function SWEP:Initialize()
 	
@@ -64,7 +66,7 @@ end
 
 function SWEP:PrimaryFire()
 
-	local currentEnemy = self.CurrentEnemy
+	local currentEnemy = self.LastEnemy
 	local fireDelay = self.Primary.FireDelay
 	local burstCount = math.random(self.Primary.BurstMinShots, self.Primary.BurstMaxShots)
 	local burstDelay = math.Rand(self.Primary.BurstMinDelay, self.Primary.BurstMaxDelay)
@@ -189,6 +191,12 @@ function SWEP:ShootEffects()
 
 end
 
+function SWEP:ReloadEffects()
+	
+	self:EmitSound(self.ReloadSound)
+
+end
+
 function SWEP:Think()
 	
 	timer.Simple(0.01, function()
@@ -209,15 +217,23 @@ function SWEP:Think()
 			owner:SetMovementActivity(ACT_WALK)
 
 		end
+
+		local ownerActivity = owner:GetActivity()
+		if ownerActivity == ACT_RELOAD and self.LastActivity ~= ACT_RELOAD then
+
+			self:ReloadEffects()
+
+		end
+		self.LastActivity = ownerActivity
 		
 		local enemy = owner:GetEnemy()
 		if IsValid(enemy) then
 			
 			local enemyVisible = owner:Visible(enemy)
-			if enemy ~= self.CurrentEnemy or not enemyVisible then
+			if enemy ~= self.LastEnemy or not enemyVisible then
 
 				self:SetNextPrimaryFireAimDelay()
-				self.CurrentEnemy = enemy
+				self.LastEnemy = enemy
 			
 			end
 			local enemyIsAlive = enemy:Health() > 0 and enemy:GetMaxHealth() > 0
