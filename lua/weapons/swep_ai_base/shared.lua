@@ -214,15 +214,14 @@ function SWEP:Think()
 		if IsValid(enemy) then
 			
 			local enemyVisible = owner:Visible(enemy)
-			
 			if enemy ~= self.CurrentEnemy or not enemyVisible then
 
 				self:SetNextPrimaryFireAimDelay()
 				self.CurrentEnemy = enemy
 			
 			end
-			
-			if self:GetNextPrimaryFire() <= CurTime() and self:CanPrimaryFire() and enemy:Health() > 0 and enemyVisible then
+			local enemyIsAlive = enemy:Health() > 0 and enemy:GetMaxHealth() > 0
+			if self:GetNextPrimaryFire() <= CurTime() and self:CanPrimaryFire() and enemyIsAlive and enemyVisible then
 
 				self:PrimaryFire()
 			
