@@ -32,27 +32,39 @@ SWEP.Primary.Sound				= "swep_ai_scout_fire"
 SWEP.Primary.BoltSound			= "swep_ai_scout_bolt"
 
 function SWEP:ShootEffects()
-
-	self.Weapon:EmitSound(self.Primary.Sound)
 	
-	timer.Simple(0.8, function()
-		if IsValid(self) and IsValid(self.Weapon) and IsValid(self.Owner) then
-			sound.Play(self.Primary.BoltSound, self.Weapon:GetPos())
+	self:EmitSound(self.Primary.Sound)
+
+	timer.Simple(0.9, function()
+
+		if IsValid(self) and IsValid(self:GetOwner()) then
+
+			sound.Play(self.Primary.BoltSound, self.Weapon:GetPos(), SNDLVL_NORM)
 			
 			local shellEffect = EffectData()
-			shellEffect:SetEntity(self.Weapon)
-			shellEffect:SetOrigin(self.Weapon:GetAttachment(self.ShellAttachment).Pos)
-			shellEffect:SetAngles(self.Weapon:GetAttachment(self.ShellAttachment).Ang)
+			local shellAttach = self:GetAttachment(self.ShellAttachment)
+			shellEffect:SetEntity(self)
+			shellEffect:SetOrigin(shellAttach.Pos)
+			shellEffect:SetAngles(shellAttach.Ang)
+			shellEffect:SetScale(1)
+			shellEffect:SetMagnitude(1)
+			shellEffect:SetRadius(1)
 			util.Effect(self.ShellEffect, shellEffect)
+
 		end
+
 	end)
-	
+
 	local muzzleEffect = EffectData()
-	muzzleEffect:SetEntity(self.Weapon)
-	muzzleEffect:SetOrigin(self.Weapon:GetAttachment(self.MuzzleAttachment).Pos)
-	muzzleEffect:SetAngles(self.Weapon:GetAttachment(self.MuzzleAttachment).Ang)
+	local muzzleAttach = self:GetAttachment(self.MuzzleAttachment)
+	muzzleEffect:SetEntity(self)
+	muzzleEffect:SetOrigin(muzzleAttach.Pos)
+	muzzleEffect:SetAngles(muzzleAttach.Ang)
+	muzzleEffect:SetScale(1)
+	muzzleEffect:SetMagnitude(1)
+	muzzleEffect:SetRadius(1)
 	util.Effect(self.MuzzleEffect, muzzleEffect)
 	
-	self.Owner:MuzzleFlash()
+	self:GetOwner():MuzzleFlash()
 
 end
