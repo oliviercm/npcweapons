@@ -35,8 +35,8 @@ SWEP.RocketAcceleration			= 300
 
 function SWEP:Shoot()
 
-	local owner = self.Owner
-	local muzzlePos = self.Weapon:GetAttachment(self.MuzzleAttachment).Pos
+	local owner = self:GetOwner()
+	local muzzlePos = self:GetAttachment(self.MuzzleAttachment).Pos
 	local targetPos = owner:GetEnemy():WorldSpaceCenter()
 	local inaccuracy = self.Primary.Spread
 	local shootAngle = Vector(targetPos.x - muzzlePos.x, targetPos.y - muzzlePos.y, targetPos.z - muzzlePos.z):Angle()
