@@ -10,7 +10,9 @@ SWEP.HoldType					= "shotgun"
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "ShotgunShellEject"
 SWEP.TracerEffect				= "Tracer"
+SWEP.ReloadSounds				= {{0.6, "swep_ai_shotgun_reload_1"}}
 
+SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_MED
 SWEP.Primary.DamageMin			= 8
 SWEP.Primary.DamageMax			= 10
 SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_SHOTGUN

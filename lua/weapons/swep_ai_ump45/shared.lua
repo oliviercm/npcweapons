@@ -10,7 +10,9 @@ SWEP.HoldType					= "ar2"
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "ShellEject"
 SWEP.TracerEffect				= "Tracer"
+SWEP.ReloadSounds				= {{0.2, "swep_ai_ump45_reload_1"}, {1.2, "swep_ai_ump45_reload_2"}, {1.8, "swep_ai_ump45_reload_3"}}
 
+SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_MED
 SWEP.Primary.DamageMin			= 6
 SWEP.Primary.DamageMax			= 8
 SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_SMG

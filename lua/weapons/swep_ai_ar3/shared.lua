@@ -10,8 +10,10 @@ SWEP.HoldType					= "ar2"
 SWEP.MuzzleEffect    			= "AirboatMuzzleFlash"
 SWEP.ShellEffect				= ""
 SWEP.TracerEffect				= "AirboatGunTracer"
+SWEP.ReloadSounds				= {{0, "swep_ai_ar2_reload"}}
 SWEP.EnableShellEffect			= false
 
+SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_HIGH
 SWEP.Primary.DamageMin			= 4
 SWEP.Primary.DamageMax			= 6
 SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_RIFLE

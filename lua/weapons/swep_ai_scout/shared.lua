@@ -10,7 +10,9 @@ SWEP.HoldType					= "ar2"
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "RifleShellEject"
 SWEP.TracerEffect				= "Tracer"
+SWEP.ReloadSounds				= {{0.4, "swep_ai_scout_reload_1"}, {1.6, "swep_ai_scout_reload_2"}, {2, "swep_ai_scout_reload_3"}}
 
+SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_HIGH
 SWEP.Primary.DamageMin			= 19
 SWEP.Primary.DamageMax			= 21
 SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_SNIPER
@@ -39,7 +41,10 @@ function SWEP:ShootEffects()
 
 		if IsValid(self) and IsValid(self:GetOwner()) then
 
-			sound.Play(self.Primary.BoltSound, self:GetPos(), SNDLVL_NORM)
+			local ownerActivity = self:GetOwner():GetActivity()
+			if ownerActivity ~= ACT_RELOAD then
+				sound.Play(self.Primary.BoltSound, self:GetPos(), SNDLVL_NORM)
+			end
 			
 			local shellEffect = EffectData()
 			local shellAttach = self:GetAttachment(self.ShellAttachment)

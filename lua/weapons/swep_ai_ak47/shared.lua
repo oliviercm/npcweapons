@@ -10,7 +10,9 @@ SWEP.HoldType					= "ar2"
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "RifleShellEject"
 SWEP.TracerEffect				= "Tracer"
+SWEP.ReloadSounds				= {{0.2, "swep_ai_ak47_reload_1"}, {1.4, "swep_ai_ak47_reload_2"}, {1.8, "swep_ai_ak47_reload_3"}}
 
+SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_MED
 SWEP.Primary.DamageMin			= 11
 SWEP.Primary.DamageMax			= 13
 SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_RIFLE

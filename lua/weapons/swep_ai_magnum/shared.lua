@@ -11,7 +11,9 @@ SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "ShellEject"
 SWEP.TracerEffect				= "Tracer"
 SWEP.EnableShellEffect			= false
+SWEP.ReloadSounds				= {{0, "swep_ai_magnum_reload_1"}, {0.2, "swep_ai_magnum_reload_2"}, {1.2, "swep_ai_magnum_reload_3"}, {2, "swep_ai_magnum_reload_4"}}
 
+SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_MED
 SWEP.Primary.DamageMin			= 11
 SWEP.Primary.DamageMax			= 13
 SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_PISTOL

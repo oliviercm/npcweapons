@@ -11,7 +11,9 @@ SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= ""
 SWEP.TracerEffect				= ""
 SWEP.ShowShellEffect    		= false
+SWEP.ReloadSounds				= {{2.0, "swep_ai_automaticpistol_cock"}}
 
+SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_HIGH
 SWEP.Primary.DamageMin			= 40
 SWEP.Primary.DamageMax			= 40
 SWEP.Primary.Force				= 0

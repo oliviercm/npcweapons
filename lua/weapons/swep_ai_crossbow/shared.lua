@@ -12,7 +12,9 @@ SWEP.ShellEffect				= ""
 SWEP.TracerEffect				= ""
 SWEP.EnableMuzzleEffect    		= false
 SWEP.EnableShellEffect    		= false
+SWEP.ReloadSounds				= {{0.2, "swep_ai_crossbow_reload_1"}, {1.6, "swep_ai_crossbow_reload_2"}}
 
+SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_HIGH
 SWEP.Primary.DamageMin			= 100
 SWEP.Primary.DamageMax			= 100
 SWEP.Primary.Force				= 20000
