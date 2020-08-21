@@ -192,12 +192,6 @@ function SWEP:ShootEffects()
 
 end
 
-function SWEP:EmitReloadEffects()
-	
-	return
-
-end
-
 function SWEP:EmitReloadSounds()
 
 	if not self.ReloadSounds then return end
@@ -243,7 +237,6 @@ function SWEP:Think()
 		if ownerActivity == ACT_RELOAD and self.LastActivity ~= ACT_RELOAD then
 
 			self:SetNextPrimaryFireReload()
-			self:EmitReloadEffects()
 			self:EmitReloadSounds()
 
 		end
