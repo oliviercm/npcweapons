@@ -29,3 +29,39 @@ SWEP.Primary.DefaultClip		= 8
 SWEP.Primary.AimDelayMin		= NPC_WEAPONS_MIN_AIM_DELAY_LOW
 SWEP.Primary.AimDelayMax		= NPC_WEAPONS_MAX_AIM_DELAY_LOW
 SWEP.Primary.Sound				= "swep_ai_m3_fire"
+
+function SWEP:ShootEffects()
+	
+	self:EmitSound(self.Primary.Sound)
+
+	timer.Simple(0.5, function()
+
+		if IsValid(self) and IsValid(self:GetOwner()) then
+			
+			local shellEffect = EffectData()
+			local shellAttach = self:GetAttachment(self.ShellAttachment)
+			shellEffect:SetEntity(self)
+			shellEffect:SetOrigin(shellAttach.Pos)
+			shellEffect:SetAngles(shellAttach.Ang)
+			shellEffect:SetScale(1)
+			shellEffect:SetMagnitude(1)
+			shellEffect:SetRadius(1)
+			util.Effect(self.ShellEffect, shellEffect)
+
+		end
+
+	end)
+
+	local muzzleEffect = EffectData()
+	local muzzleAttach = self:GetAttachment(self.MuzzleAttachment)
+	muzzleEffect:SetEntity(self)
+	muzzleEffect:SetOrigin(muzzleAttach.Pos)
+	muzzleEffect:SetAngles(muzzleAttach.Ang)
+	muzzleEffect:SetScale(1)
+	muzzleEffect:SetMagnitude(1)
+	muzzleEffect:SetRadius(1)
+	util.Effect(self.MuzzleEffect, muzzleEffect)
+	
+	self:GetOwner():MuzzleFlash()
+
+end
