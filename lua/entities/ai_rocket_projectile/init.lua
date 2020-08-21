@@ -48,41 +48,25 @@ function ENT:PhysicsCollide(data, physobj)
 			local maxDamage = self.Damage * GetConVar("npc_weapons_damage_mult"):GetFloat()
 			local damage = Lerp(distance / radius, maxDamage, 0)
 			
-			local vcl = v:GetClass()
+			local direction = (victimPos - projPos):GetNormalized()
+		
+			local owner = self:GetOwner()
+			local dmginfo = DamageInfo()
+			if IsValid(owner) then
 			
-			if vcl == "npc_strider" or vcl == "npc_helicopter" or vcl == "npc_combinedropship" or vcl == "npc_combinegunship" or vcl == "npc_turret_floor" then
+				dmginfo:SetAttacker(owner)
 				
-				if IsValid(self.Owner) then
-				
-					v:TakeDamage(damage, self.Owner, self.Owner)
-					
-				else
-				
-					v:TakeDamage(damage, self, self)
-				
-				end
-			
 			else
 			
-				local direction = (victimPos - projPos):GetNormalized()
+				dmginfo:SetAttacker(self)
 			
-				local dmginfo = DamageInfo()
-				if IsValid(self.Owner) then
-				
-					dmginfo:SetAttacker(self.Owner)
-					
-				else
-				
-					dmginfo:SetAttacker(self)
-				
-				end
-				dmginfo:SetDamage(damage)
-				dmginfo:SetDamageType(DMG_BLAST)
-				dmginfo:SetDamageForce(direction * damage * damage * 10)
-				dmginfo:SetDamagePosition(victimPos)
-				v:TakeDamageInfo(dmginfo)
-				
 			end
+
+			dmginfo:SetDamage(damage)
+			dmginfo:SetDamageType(DMG_BLAST)
+			dmginfo:SetDamageForce(direction * damage * damage * 10)
+			dmginfo:SetDamagePosition(victimPos)
+			v:TakeDamageInfo(dmginfo)
 		
 		end
 		
