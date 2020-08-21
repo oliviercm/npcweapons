@@ -40,7 +40,6 @@ SWEP.Primary.FireDelay			= 0 --How much time should there be between each shot?
 SWEP.Primary.NumBullets			= 0 --How many bullets should there be for each shot? Most weapons would have this as 1, but shotguns would have a different value, like 8 or 9.
 SWEP.Primary.ClipSize			= 0 --How many shots should we get per reload?
 SWEP.Primary.DefaultClip		= 0 --How many shots should the weapon spawn with in the magazine? Usually you want this the same as SWEP.Primary.ClipSize.
-SWEP.Primary.NextBurst 			= 0 --This value is used to store the next server time when we can shoot, don't touch it.
 SWEP.Primary.AimDelayMin		= 0 --How long should we wait before shooting a new enemy, at minimum?
 SWEP.Primary.AimDelayMax		= 0 --How long should we wait before shooting a new enemy, at maximum?
 SWEP.Primary.Sound				= "weapons/pistol/pistol_fire2.wav" --What sound should we play when the gun fires?
@@ -63,7 +62,6 @@ end
 
 function SWEP:PrimaryFire()
 
-	local curtime = CurTime()
 	local currentEnemy = self.CurrentEnemy
 	local fireDelay = self.Primary.FireDelay
 	local burstCount = math.random(self.Primary.BurstMinShots, self.Primary.BurstMaxShots)
@@ -73,7 +71,10 @@ function SWEP:PrimaryFire()
 		
 		timer.Simple((i - 1) * fireDelay, function()
 		
-			if not IsValid(self) or not IsValid(self.Owner) or not self:CanPrimaryFire() or not self.Owner:GetEnemy() or self.Owner:GetEnemy() ~= currentEnemy then
+			if not IsValid(self) then return end
+
+			local owner = self:GetOwner()
+			if not IsValid(owner) or not self:CanPrimaryFire() or not owner:GetEnemy() or owner:GetEnemy() ~= currentEnemy then
 				return
 			end
 
@@ -83,28 +84,20 @@ function SWEP:PrimaryFire()
 	
 	end
 	
-	self.Primary.NextBurst = curtime + burstCount * fireDelay + burstDelay
+	self:SetNextPrimaryFire(CurTime() + burstCount * fireDelay + burstDelay)
 	
 end
 
 function SWEP:Shoot()
 
-	local owner = self.Owner
+	local owner = self:GetOwner()
 	local enemy = owner:GetEnemy()
-	local enemycl = enemy:GetClass()
+
 	local targetPos = nil
+	if enemy:IsPlayer() or swepAiBaseHasHeadBoneTable[enemy:GetClass()] then
 	
-	if enemy:IsPlayer() or swepAiBaseHasHeadBoneTable[enemycl] then
-	
-		if enemy:LookupBone("ValveBiped.Bip01_Head1") then
-		
-			targetPos = enemy:GetBonePosition(enemy:LookupBone("ValveBiped.Bip01_Head1"))
-		
-		else
-		
-			targetPos = enemy:EyePos()
-			
-		end
+		local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
+		targetPos = headBone and enemy:GetBonePosition(headBone) or enemy:EyePos()
 		
 	else
 	
@@ -112,20 +105,10 @@ function SWEP:Shoot()
 		
 	end
 	
-	local muzzlePos = self.Weapon:GetAttachment(self.MuzzleAttachment).Pos
+	local muzzlePos = self:GetAttachment(self.MuzzleAttachment).Pos
 	local direction = (targetPos - muzzlePos):GetNormalized()
-	local spread = nil
-	
-	if owner:IsMoving() then
-	
-		spread = self.Primary.Spread * self.Primary.SpreadMoveMult
-		
-	else
-	
-		spread = self.Primary.Spread
-		
-	end
-	
+	local spread = owner:IsMoving() and self.Primary.Spread * self.Primary.SpreadMoveMult or self.Primary.Spread
+
 	local bulletInfo = {}
 	bulletInfo.Attacker = owner
 	bulletInfo.Callback = self.FireBulletsCallback
@@ -139,7 +122,7 @@ function SWEP:Shoot()
 	bulletInfo.Spread = Vector(spread, spread, 0)
 	bulletInfo.Src = muzzlePos
 	
-	owner:FireBullets(bulletInfo)
+	self:FireBullets(bulletInfo)
 	self:ShootEffects()
 	
 	if not self.Primary.InfiniteAmmo then
@@ -170,13 +153,13 @@ end
 
 function SWEP:ShootEffects()
 	
-	self.Weapon:EmitSound(self.Primary.Sound)
+	self:EmitSound(self.Primary.Sound)
 	
 	if self.EnableMuzzleEffect then
 	
 		local muzzleEffect = EffectData()
-		local muzzleAttach = self.Weapon:GetAttachment(self.MuzzleAttachment)
-		muzzleEffect:SetEntity(self.Weapon)
+		local muzzleAttach = self:GetAttachment(self.MuzzleAttachment)
+		muzzleEffect:SetEntity(self)
 		muzzleEffect:SetOrigin(muzzleAttach.Pos)
 		muzzleEffect:SetAngles(muzzleAttach.Ang)
 		muzzleEffect:SetScale(1)
@@ -184,15 +167,15 @@ function SWEP:ShootEffects()
 		muzzleEffect:SetRadius(1)
 		util.Effect(self.MuzzleEffect, muzzleEffect)
 		
-		self.Owner:MuzzleFlash()
+		self:GetOwner():MuzzleFlash()
 	
 	end
 
 	if self.EnableShellEffect then
 	
 		local shellEffect = EffectData()
-		local shellAttach = self.Weapon:GetAttachment(self.ShellAttachment)
-		shellEffect:SetEntity(self.Weapon)
+		local shellAttach = self:GetAttachment(self.ShellAttachment)
+		shellEffect:SetEntity(self)
 		shellEffect:SetOrigin(shellAttach.Pos)
 		shellEffect:SetAngles(shellAttach.Ang)
 		shellEffect:SetScale(1)
@@ -216,30 +199,22 @@ function SWEP:Think()
 	
 	end)
 	
-	if IsValid(self.Owner) then
+	local owner = self:GetOwner()
+	if IsValid(owner) then
 		
-		local owner = self.Owner
-		local curtime = CurTime()
-		
-		if IsValid(owner:GetEnemy()) then
+		local enemy = owner:GetEnemy()
+		if IsValid(enemy) then
 			
-			local enemy = owner:GetEnemy()
-			local enemyVisible = enemy:Visible(owner)
+			local enemyVisible = owner:Visible(enemy)
 			
 			if enemy ~= self.CurrentEnemy or not enemyVisible then
 
-				if self.Primary.NextBurst <= curtime + self.Primary.AimDelayMax then
-
-					local aimtime = math.Rand(self.Primary.AimDelayMin, self.Primary.AimDelayMax)
-					self.Primary.NextBurst = curtime + aimtime
-	
-				end
-				
+				self:SetNextPrimaryFireAimDelay()
 				self.CurrentEnemy = enemy
 			
 			end
 			
-			if self.Primary.NextBurst <= curtime and self:CanPrimaryFire() and enemy:Health() > 0 and enemyVisible then
+			if self:GetNextPrimaryFire() <= CurTime() and self:CanPrimaryFire() and enemy:Health() > 0 and enemyVisible then
 
 				self:PrimaryFire()
 			
@@ -247,38 +222,31 @@ function SWEP:Think()
 			
 		else
 			
-			if self.Primary.NextBurst <= curtime + self.Primary.AimDelayMax then
-
-				local aimtime = math.Rand(self.Primary.AimDelayMin, self.Primary.AimDelayMax)
-				self.Primary.NextBurst = curtime + aimtime
-
-			end
+			self:SetNextPrimaryFireAimDelay()
 
 		end
 		
 	end
 	
-	if self.Weapon:Clip1() <= 0 and not self.Owner:IsCurrentSchedule(SCHED_RELOAD) and not self.Owner:IsCurrentSchedule(SCHED_HIDE_AND_RELOAD) then
+	if self:Clip1() <= 0 and not owner:IsCurrentSchedule(SCHED_RELOAD) and not owner:IsCurrentSchedule(SCHED_HIDE_AND_RELOAD) then
 	
-		self.Owner:SetSchedule(SCHED_HIDE_AND_RELOAD)
+		owner:SetSchedule(SCHED_RELOAD)
 	
 	end
 	
 end
 
 function SWEP:CanPrimaryFire()
-	
-	local owner = self.Owner
-	
-	if self.Weapon:Clip1() <= 0 or owner:GetActivity() == ACT_RELOAD then
+
+	local owner = self:GetOwner()
+	if self:Clip1() <= 0 or owner:GetActivity() == ACT_RELOAD then
 	
 		return false
 	
 	end
 	
 	local enemy = owner:GetEnemy()
-	
-	if enemy then
+	if IsValid(enemy) then
 	
 		local aimDirection = owner:GetAngles().y
 		local enemyDirection = Vector(enemy:GetPos() - owner:GetPos()):Angle().y
@@ -295,9 +263,20 @@ function SWEP:CanPrimaryFire()
 
 end
 
+function SWEP:SetNextPrimaryFireAimDelay()
+
+	local curtime = CurTime()
+	if self:GetNextPrimaryFire() <= curtime + self.Primary.AimDelayMax then
+
+		local aimtime = math.Rand(self.Primary.AimDelayMin, self.Primary.AimDelayMax)
+		self:SetNextPrimaryFire(curtime + aimtime)
+
+	end
+
+end
+
 function SWEP:GetCapabilities()
-	--Prevents weapons from firing animation events (e.g. built-in HL2 guns muzzleflash & shell casings)
-	return 64
+	return 0 --Prevents weapons from firing animation events (e.g. built-in HL2 guns muzzleflash & shell casings)
 end
 
 function SWEP:PrimaryAttack()
