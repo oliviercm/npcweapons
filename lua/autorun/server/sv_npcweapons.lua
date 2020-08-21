@@ -1,9 +1,3 @@
-if not ConVarExists("npc_weapons_damage_mult") then
-	
-	CreateConVar("npc_weapons_damage_mult", 1, FCVAR_ARCHIVE + FCVAR_NOTIFY)
-	
-end
-
 NPC_WEAPONS_MIN_AIM_DELAY_NONE = 0.00
 NPC_WEAPONS_MAX_AIM_DELAY_NONE = 0.00
 NPC_WEAPONS_MIN_AIM_DELAY_LOW = 0.25

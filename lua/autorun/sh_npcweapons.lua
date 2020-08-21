@@ -1,3 +1,9 @@
+CreateConVar("npc_weapons_damage_mult", 1, FCVAR_ARCHIVE + FCVAR_NOTIFY)
+
+-------------------
+--NPC WEAPON MENU--
+-------------------
+
 list.Add("NPCUsableWeapons", {class = "swep_ai_annabelle", title = "[NPCW] ANNABELLE"})
 list.Add("NPCUsableWeapons", {class = "swep_ai_ar2", title = "[NPCW] AR2"})
 list.Add("NPCUsableWeapons", {class = "swep_ai_ar3", title = "[NPCW] AR3"})
