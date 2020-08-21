@@ -76,6 +76,7 @@ local SNDLVL_RELOAD = SNDLVL_IDLE
 local PITCH_GUNFIRE = {95, 105}
 local PITCH_NORM = 100
 local VOLUME_MAX = 1
+local VOLUME_BOLT = 0.4
 local VOLUME_SUPPRESSED = 0.6
 local VOLUME_RELOAD = 0.2
 
@@ -233,7 +234,7 @@ sound.Add({
 sound.Add({
 	name = "swep_ai_awp_bolt",
 	channel = CHAN_WEAPON,
-	volume = VOLUME_MAX,
+	volume = VOLUME_BOLT,
 	level = SNDLVL_NORM,
 	pitch = PITCH_NORM,
 	sound = "weapons/awp/awp_bolt.wav"
@@ -581,7 +582,7 @@ sound.Add({
 sound.Add({
 	name = "swep_ai_leveraction_bolt",
 	channel = CHAN_WEAPON,
-	volume = VOLUME_MAX,
+	volume = VOLUME_BOLT,
 	level = SNDLVL_NORM,
 	pitch = PITCH_NORM,
 	sound = "weapons/shotgun/shotgun_cock.wav"
@@ -948,7 +949,7 @@ sound.Add({
 sound.Add({
 	name = "swep_ai_scout_bolt",
 	channel = CHAN_WEAPON,
-	volume = VOLUME_MAX,
+	volume = VOLUME_BOLT,
 	level = SNDLVL_NORM,
 	pitch = PITCH_NORM,
 	sound = "weapons/scout/scout_bolt.wav"
@@ -1055,7 +1056,7 @@ sound.Add({
 sound.Add({
 	name = "swep_ai_shotgun_cock",
 	channel = CHAN_WEAPON,
-	volume = VOLUME_MAX,
+	volume = VOLUME_BOLT,
 	level = SNDLVL_NORM,
 	pitch = PITCH_NORM,
 	sound = "weapons/shotgun/shotgun_cock.wav"
