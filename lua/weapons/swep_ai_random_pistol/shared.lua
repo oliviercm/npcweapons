@@ -12,10 +12,15 @@ end
 
 function SWEP:OnRemove()
 
-	if SERVER and IsValid(self) and IsValid(self.Owner) and self.Owner:IsNPC() then
+	if SERVER and IsValid(self) then
+
+		local owner = self:GetOwner()
+		if IsValid(owner) and owner:IsNPC() then
 		
-		self.Owner:Give(table.Random(self.WeaponList))
-		
+			owner:Give(table.Random(self.WeaponList))
+			
+		end
+
 	end
 
 end
