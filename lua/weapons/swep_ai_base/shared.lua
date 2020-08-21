@@ -107,7 +107,7 @@ function SWEP:Shoot()
 		
 	end
 	
-	local muzzlePos = self:GetAttachment(self.MuzzleAttachment).Pos
+	local muzzlePos = owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
 	local direction = (targetPos - muzzlePos):GetNormalized()
 	local spread = owner:IsMoving() and self.Primary.Spread * self.Primary.SpreadMoveMult or self.Primary.Spread
 
