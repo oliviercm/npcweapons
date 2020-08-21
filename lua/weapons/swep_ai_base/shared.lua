@@ -198,7 +198,9 @@ function SWEP:EmitReloadEffects()
 end
 
 function SWEP:EmitReloadSounds()
-	
+
+	if not self.ReloadSounds then return end
+
 	for k, v in pairs(self.ReloadSounds) do
 
 		timer.Simple(v[1], function()
