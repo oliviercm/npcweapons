@@ -63,7 +63,7 @@ list.Add("NPCUsableWeapons", {class = "swep_ai_random_sniper", title = "[NPCW] [
 
 local SNDLVL_GUNFIRE = 80
 local SNDLVL_NORM = 65
-local PITCH_GUNFIRE = {90, 110}
+local PITCH_GUNFIRE = {95, 105}
 local PITCH_NORM = 100
 
 --AK47--
