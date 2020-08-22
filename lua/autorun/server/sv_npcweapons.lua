@@ -28,21 +28,6 @@ NPC_WEAPONS_RELOAD_TIME_LOW = 1.8
 NPC_WEAPONS_RELOAD_TIME_MED = 2.2
 NPC_WEAPONS_RELOAD_TIME_HIGH = 2.6
 
-swepAiBaseHasHeadBoneTable = swepAiBaseHasHeadBoneTable or {}
-swepAiBaseHasHeadBoneTable["npc_combine_s"] = true
-swepAiBaseHasHeadBoneTable["npc_citizen"] = true
-swepAiBaseHasHeadBoneTable["npc_alyx"] = true
-swepAiBaseHasHeadBoneTable["npc_barney"] = true
-swepAiBaseHasHeadBoneTable["npc_monk"] = true
-swepAiBaseHasHeadBoneTable["npc_eli"] = true
-swepAiBaseHasHeadBoneTable["npc_kleiner"] = true
-swepAiBaseHasHeadBoneTable["npc_magnusson"] = true
-swepAiBaseHasHeadBoneTable["npc_mossman"] = true
-swepAiBaseHasHeadBoneTable["npc_breen"] = true
-swepAiBaseHasHeadBoneTable["npc_metropolice"] = true
-swepAiBaseHasHeadBoneTable["npc_zombie"] = true
-swepAiBaseHasHeadBoneTable["npc_zombine"] = true
-
 npcWeaponsRandomAll = npcWeaponsRandomAll or
 {
 	"swep_ai_ak47",

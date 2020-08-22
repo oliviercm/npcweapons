@@ -98,19 +98,20 @@ function SWEP:Shoot()
 	local owner = self:GetOwner()
 	local enemy = owner:GetEnemy()
 
+	local muzzlePos = owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
 	local targetPos = nil
-	if enemy:IsPlayer() or swepAiBaseHasHeadBoneTable[enemy:GetClass()] then
 	
+	if enemy:GetClass() == "npc_combine_s" then
+
 		local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
-		targetPos = headBone and enemy:GetBonePosition(headBone) or enemy:EyePos()
-		
+		targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:WorldSpaceCenter()
+
 	else
-	
-		targetPos = enemy:WorldSpaceCenter()
-		
+
+		targetPos = enemy:HeadTarget(muzzlePos) or (enemy:LookupBone("ValveBiped.Bip01_Head1") and enemy:GetBonePosition(enemy:LookupBone("ValveBiped.Bip01_Head1"))) or enemy:WorldSpaceCenter()
+
 	end
 	
-	local muzzlePos = owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
 	local direction = (targetPos - muzzlePos):GetNormalized()
 	local spread = owner:IsMoving() and self.Primary.Spread * self.Primary.SpreadMoveMult or self.Primary.Spread
 
