@@ -5,7 +5,7 @@ DEFINE_BASECLASS("swep_ai_base")
 --]]
 
 SWEP.WorldModel					= "models/weapons/hl2/w_smg3.mdl"
-SWEP.HoldType					= "ar2"
+SWEP.HoldType					= "smg"
 
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "ShellEject"
