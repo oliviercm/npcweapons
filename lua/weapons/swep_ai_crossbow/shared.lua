@@ -32,7 +32,7 @@ SWEP.Primary.AimDelayMin		= NPC_WEAPONS_MIN_AIM_DELAY_HIGH
 SWEP.Primary.AimDelayMax		= NPC_WEAPONS_MAX_AIM_DELAY_HIGH
 SWEP.Primary.Sound				= "swep_ai_crossbow_fire"
 
-SWEP.ProjectileModel			= "models/weapons/flare.mdl"
+SWEP.ProjectileModel			= "models/crossbow_bolt.mdl"
 SWEP.ProjectileSpeed			= 2400
 SWEP.ProjectileAcceleration		= 0
 SWEP.ProjectileDamageType		= DMG_GENERIC
@@ -64,8 +64,8 @@ function SWEP:Shoot()
 	projectile.HitEffect = self.ProjectileHitEffect
 	projectile.HitSound = self.ProjectileHitSound
 	
-	projectile:SetColor(Color(255, 128, 0, 255))
-	util.SpriteTrail(projectile, 0, Color(255, 128, 0, 255), false, 3, 0, 0.2, 0, "trails/smoke.vmt")
+	projectile:SetColor(Color(255, 255, 255, 255))
+	util.SpriteTrail(projectile, 0, Color(255, 128, 0, 255), true, 1, 0, 0.2, 0, "trails/smoke.vmt")
 	
 	projectile:Spawn()
 	
