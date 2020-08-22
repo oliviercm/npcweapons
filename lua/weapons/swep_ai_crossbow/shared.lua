@@ -37,7 +37,7 @@ SWEP.ProjectileSpeed			= 2400
 SWEP.ProjectileAcceleration		= 0
 SWEP.ProjectileDamageType		= DMG_GENERIC
 SWEP.ProjectileHitEffect		= "cball_bounce"
-SWEP.ProjectileHitSound			= "weapons/crossbow/bolt_skewer1.wav"
+SWEP.ProjectileHitSound			= "weapons/crossbow/hit1.wav"
 
 function SWEP:Shoot()
 
@@ -63,9 +63,6 @@ function SWEP:Shoot()
 	projectile.Owner = owner
 	projectile.HitEffect = self.ProjectileHitEffect
 	projectile.HitSound = self.ProjectileHitSound
-	
-	projectile:SetColor(Color(255, 255, 255, 255))
-	util.SpriteTrail(projectile, 0, Color(255, 128, 0, 255), true, 1, 0, 0.2, 0, "trails/smoke.vmt")
 	
 	projectile:Spawn()
 	
