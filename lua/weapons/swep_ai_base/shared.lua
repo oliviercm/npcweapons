@@ -9,7 +9,7 @@
 
 SWEP.PrintName					= "NPC Weapon Base"
 SWEP.Author						= "xyzzy"
-SWEP.Contact					= "xyzzy: http://steamcommunity.com/id/theRealXyzzy/ Lesslife: http://steamcommunity.com/id/Bloodyhunter"
+SWEP.Contact					= "http://steamcommunity.com/id/theRealXyzzy/"
 SWEP.Category					= "NPC Weapons"
 
 SWEP.WorldModel					= "models/weapons/w_pistol.mdl" --What model should we use as the world model?
