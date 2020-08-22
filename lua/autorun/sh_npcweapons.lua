@@ -78,7 +78,7 @@ local PITCH_NORM = 100
 local VOLUME_MAX = 1
 local VOLUME_BOLT = 0.4
 local VOLUME_SUPPRESSED = 0.6
-local VOLUME_RELOAD = 0.2
+local VOLUME_RELOAD = 0.3
 
 --AK47--
 sound.Add({
