@@ -105,15 +105,15 @@ function SWEP:Shoot()
 	if enemyClass == "npc_combine_s" then
 
 		local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
-		targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos)
+		targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
 
 	elseif enemyClass == "npc_headcrab" or enemyClass == "npc_headcrab_black" or enemyClass == "npc_headcrab_fast" then
 
-		targetPos = enemy:BodyTarget(muzzlePos) or enemy:HeadTarget(muzzlePos)
+		targetPos = enemy:BodyTarget(muzzlePos) or enemy:HeadTarget(muzzlePos) or enemy:WorldSpaceCenter()
 
 	else
 
-		targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget()
+		targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget() or enemy:WorldSpaceCenter()
 
 	end
 
