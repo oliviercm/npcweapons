@@ -40,7 +40,7 @@ function SWEP:Shoot()
 	local owner = self:GetOwner()
 	local enemy = owner:GetEnemy()
 	local muzzlePos = owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
-	local targetPos = enemy:WorldSpaceCenter()
+	local targetPos = enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
 	local inaccuracy = self.Primary.Spread
 	local shootAngle = Vector(targetPos.x - muzzlePos.x, targetPos.y - muzzlePos.y, targetPos.z - muzzlePos.z):Angle()
 	shootAngle.p = shootAngle.p + math.Rand(-inaccuracy, inaccuracy)

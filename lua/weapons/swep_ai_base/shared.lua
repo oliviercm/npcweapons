@@ -102,21 +102,25 @@ function SWEP:Shoot()
 	local targetPos = nil
 	
 	local enemyClass = enemy:GetClass()
-	if enemyClass == "npc_combine_s" then
+	if swepAiBaseAimForHead[enemyClass] then
 
-		local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
-		targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+		if enemyClass == "npc_combine_s" then -- Special targeting for npc_combine_s because NPC:HeadTarget() doesn't return a good position when used on npc_combine_s
 
-	elseif enemyClass == "npc_headcrab" or enemyClass == "npc_headcrab_black" or enemyClass == "npc_headcrab_fast" then
+			local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
+			targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
 
-		targetPos = enemy:BodyTarget(muzzlePos) or enemy:HeadTarget(muzzlePos) or enemy:WorldSpaceCenter()
+		else
+
+			targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+
+		end
 
 	else
 
-		targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget() or enemy:WorldSpaceCenter()
+		targetPos = enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
 
 	end
-
+	
 	debugoverlay.Cross(targetPos, 3, 1, Color(255,0,0), true)
 	
 	local direction = (targetPos - muzzlePos):GetNormalized()

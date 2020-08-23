@@ -28,6 +28,21 @@ NPC_WEAPONS_RELOAD_TIME_LOW = 1.8
 NPC_WEAPONS_RELOAD_TIME_MED = 2.2
 NPC_WEAPONS_RELOAD_TIME_HIGH = 2.6
 
+swepAiBaseAimForHead = swepAiBaseAimForHead or {}
+swepAiBaseAimForHead["npc_combine_s"] = true
+swepAiBaseAimForHead["npc_citizen"] = true
+swepAiBaseAimForHead["npc_alyx"] = true
+swepAiBaseAimForHead["npc_barney"] = true
+swepAiBaseAimForHead["npc_monk"] = true
+swepAiBaseAimForHead["npc_eli"] = true
+swepAiBaseAimForHead["npc_kleiner"] = true
+swepAiBaseAimForHead["npc_magnusson"] = true
+swepAiBaseAimForHead["npc_mossman"] = true
+swepAiBaseAimForHead["npc_breen"] = true
+swepAiBaseAimForHead["npc_metropolice"] = true
+swepAiBaseAimForHead["npc_zombie"] = true
+swepAiBaseAimForHead["npc_zombine"] = true
+
 npcWeaponsRandomAll = npcWeaponsRandomAll or
 {
 	"swep_ai_ak47",
