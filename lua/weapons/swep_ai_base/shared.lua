@@ -101,23 +101,32 @@ function SWEP:Shoot()
 	local muzzlePos = owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
 	local targetPos = nil
 	
-	local enemyClass = enemy:GetClass()
-	if swepAiBaseAimForHead[enemyClass] then
+	if enemy:IsPlayer() then
 
-		if enemyClass == "npc_combine_s" then -- Special targeting for npc_combine_s because NPC:HeadTarget() doesn't return a good position when used on npc_combine_s
-
-			local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
-			targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
-
-		else
-
-			targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
-
-		end
+		local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
+		targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
 
 	else
 
-		targetPos = enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+		local enemyClass = enemy:GetClass()
+		if swepAiBaseAimForHead[enemyClass] then
+	
+			if enemyClass == "npc_combine_s" then -- Special targeting for npc_combine_s because NPC:HeadTarget() doesn't return a good position when used on npc_combine_s
+	
+				local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
+				targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+	
+			else
+	
+				targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+	
+			end
+	
+		else
+	
+			targetPos = enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+	
+		end
 
 	end
 	
