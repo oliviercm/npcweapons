@@ -101,16 +101,23 @@ function SWEP:Shoot()
 	local muzzlePos = owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
 	local targetPos = nil
 	
-	if enemy:GetClass() == "npc_combine_s" then
+	local enemyClass = enemy:GetClass()
+	if enemyClass == "npc_combine_s" then
 
 		local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
-		targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:WorldSpaceCenter()
+		targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos)
+
+	elseif enemyClass == "npc_headcrab" or enemyClass == "npc_headcrab_black" or enemyClass == "npc_headcrab_fast" then
+
+		targetPos = enemy:BodyTarget(muzzlePos) or enemy:HeadTarget(muzzlePos)
 
 	else
 
-		targetPos = enemy:HeadTarget(muzzlePos) or (enemy:LookupBone("ValveBiped.Bip01_Head1") and enemy:GetBonePosition(enemy:LookupBone("ValveBiped.Bip01_Head1"))) or enemy:WorldSpaceCenter()
+		targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget()
 
 	end
+
+	debugoverlay.Cross(targetPos, 3, 1, Color(255,0,0), true)
 	
 	local direction = (targetPos - muzzlePos):GetNormalized()
 	local spread = owner:IsMoving() and self.Primary.Spread * self.Primary.SpreadMoveMult or self.Primary.Spread
