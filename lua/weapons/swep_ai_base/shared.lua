@@ -1,6 +1,5 @@
 --////////////////
---////Original author: xyzzy
---////Current contributors: xyzzy, Lesslife
+--////Author: xyzzy
 --////////////////////////////////////////////////////////////////////////////////
 --////This is the base for my NPC weapons.
 --////If you want to learn from or use parts of my code, please credit me.
@@ -27,10 +26,10 @@ SWEP.EnableShellEffect    		= true --Enable shell casings?
 
 SWEP.ReloadTime					= 0 --How long should reloads last in seconds? NPCs will not be able to fire for this much time after starting a reload.
 SWEP.Primary.DamageMin			= 0 --How much minimum damage each bullet should do. Rule of thumb is average damage should be around 4-8 for small caliber weapons like pistols, 8-12 for medium caliber weapons like rifles, and 15+ for large caliber weapons like sniper rifles.
-SWEP.Primary.DamageMax			= 0 --How much minimum damage each bullet should do. Rule of thumb is average damage should be around 4-8 for small caliber weapons like pistols, 8-12 for medium caliber weapons like rifles, and 15+ for large caliber weapons like sniper rifles.
+SWEP.Primary.DamageMax			= 0 --How much maximum damage each bullet should do. Rule of thumb is average damage should be around 4-8 for small caliber weapons like pistols, 8-12 for medium caliber weapons like rifles, and 15+ for large caliber weapons like sniper rifles.
 SWEP.Primary.MinDropoffDistance = 0 --The minimum distance before damage begins to drop off.
-SWEP.Primary.MaxDropoffDistance = 1 --The maximum distance before damage drops off to the maximum.
-SWEP.Primary.MaxDropoffFactor   = 0.2 --The lowest factor that damage can drop off by.
+SWEP.Primary.MaxDropoffDistance = 1 --The maximum distance before damage drops off to the minimum damage.
+SWEP.Primary.MaxDropoffFactor   = 0.2 --The factor to multiply damage by when distance is equal to or more than the max dropoff distance.
 SWEP.Primary.Force				= 0 --How much force each bullet should do. Rule of thumb is set this as the average damage, but it should stay between 5 - 15. You usually don't want to go outside that range, otherwise bodies get thrown too soft/hard.
 SWEP.Primary.Spread				= 0 --How inaccurate the weapon should be. Examples: AWP - 0.003, M4A1 - 0.030, MAC10 - 0.060
 SWEP.Primary.SpreadMoveMult		= 0 --How much should we multiply the spread if the NPC is moving? Higher values mean the weapon is more inaccurate while moving. Rule of thumb is 1.2 for rifles, 1.1 for pistols, 1 for SMGs, 1.3-1.5 for MGs, and 5+ for sniper rifles.
@@ -45,7 +44,7 @@ SWEP.Primary.DefaultClip		= 0 --How many shots should the weapon spawn with in t
 SWEP.Primary.AimDelayMin		= 0 --How long should we wait before shooting a new enemy, at minimum?
 SWEP.Primary.AimDelayMax		= 0 --How long should we wait before shooting a new enemy, at maximum?
 SWEP.Primary.Sound				= "weapons/pistol/pistol_fire2.wav" --What sound should we play when the gun fires?
-SWEP.Primary.Ammo				= "pistol" --Since NPCs have infinite ammo, this value is not important and should just be left alone.
+SWEP.Primary.Ammo				= "pistol" --The ammo type of the weapon. This doesn't do anything at the moment, but if picking up these guns is ever implemented then this is the ammo type that you would get.
 SWEP.Primary.InfiniteAmmo		= false --Should we never have to reload?
 
 SWEP.ForceWalking				= false --Should NPCs be forced to walk when holding this weapon?
@@ -360,4 +359,8 @@ end
 
 function SWEP:OnDrop()
 	self:Remove()
+end
+
+function SWEP:CanBePickedUpByNPCs()
+	return true
 end
