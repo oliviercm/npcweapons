@@ -6,9 +6,7 @@ include("shared.lua")
 function ENT:Initialize()
 
 	self:SetModel(self.Model)
-	self:PhysicsInitSphere(self:GetModelRadius(), "default")
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
+	self:PhysicsInitBox(self:GetModelBounds())
 	
 	local phys = self:GetPhysicsObject()
 	if IsValid(phys) then
