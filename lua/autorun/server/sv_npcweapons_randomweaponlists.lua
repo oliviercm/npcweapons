@@ -1,50 +1,4 @@
-NPC_WEAPONS_MIN_AIM_DELAY_NONE = 0.00
-NPC_WEAPONS_MAX_AIM_DELAY_NONE = 0.00
-NPC_WEAPONS_MIN_AIM_DELAY_LOW = 0.25
-NPC_WEAPONS_MAX_AIM_DELAY_LOW = 0.50
-NPC_WEAPONS_MIN_AIM_DELAY_MED = 0.50
-NPC_WEAPONS_MAX_AIM_DELAY_MED = 1.00
-NPC_WEAPONS_MIN_AIM_DELAY_HIGH = 1.00
-NPC_WEAPONS_MAX_AIM_DELAY_HIGH = 1.50
-
-NPC_WEAPONS_MIN_DROPOFF_DISTANCE_PISTOL = 512
-NPC_WEAPONS_MAX_DROPOFF_DISTANCE_PISTOL = 2048
-NPC_WEAPONS_MIN_DROPOFF_DISTANCE_SMG = 512
-NPC_WEAPONS_MAX_DROPOFF_DISTANCE_SMG = 2048
-NPC_WEAPONS_MIN_DROPOFF_DISTANCE_SHOTGUN = 256
-NPC_WEAPONS_MAX_DROPOFF_DISTANCE_SHOTGUN = 2048
-NPC_WEAPONS_MIN_DROPOFF_DISTANCE_RIFLE = 512
-NPC_WEAPONS_MAX_DROPOFF_DISTANCE_RIFLE = 4096
-NPC_WEAPONS_MIN_DROPOFF_DISTANCE_SNIPER = 1024
-NPC_WEAPONS_MAX_DROPOFF_DISTANCE_SNIPER = 8192
-
-NPC_WEAPONS_SPREAD_MOVE_MULT_NONE = 1.0
-NPC_WEAPONS_SPREAD_MOVE_MULT_LOW = 1.1
-NPC_WEAPONS_SPREAD_MOVE_MULT_MED = 1.2
-NPC_WEAPONS_SPREAD_MOVE_MULT_HIGH = 1.4
-NPC_WEAPONS_SPREAD_MOVE_MULT_VHIGH = 5.0
-
-NPC_WEAPONS_RELOAD_TIME_LOW = 1.8
-NPC_WEAPONS_RELOAD_TIME_MED = 2.2
-NPC_WEAPONS_RELOAD_TIME_HIGH = 2.6
-
-swepAiBaseAimForHead = swepAiBaseAimForHead or {}
-swepAiBaseAimForHead["npc_combine_s"] = true
-swepAiBaseAimForHead["npc_citizen"] = true
-swepAiBaseAimForHead["npc_alyx"] = true
-swepAiBaseAimForHead["npc_barney"] = true
-swepAiBaseAimForHead["npc_monk"] = true
-swepAiBaseAimForHead["npc_eli"] = true
-swepAiBaseAimForHead["npc_kleiner"] = true
-swepAiBaseAimForHead["npc_magnusson"] = true
-swepAiBaseAimForHead["npc_mossman"] = true
-swepAiBaseAimForHead["npc_breen"] = true
-swepAiBaseAimForHead["npc_metropolice"] = true
-swepAiBaseAimForHead["npc_zombie"] = true
-swepAiBaseAimForHead["npc_zombine"] = true
-
-npcWeaponsRandomAll = npcWeaponsRandomAll or
-{
+NPC_WEAPONS_RANDOM_ALL_LIST = table.Add(NPC_WEAPONS_RANDOM_ALL_LIST or {}, {
 	"swep_ai_ak47",
 	"swep_ai_annabelle",
 	"swep_ai_ar2",
@@ -94,24 +48,21 @@ npcWeaponsRandomAll = npcWeaponsRandomAll or
 	"swep_ai_usp",
 	"swep_ai_usp_s",
 	"swep_ai_xm1014",
-}
-npcWeaponsRandomExplosive = npcWeaponsRandomExplosive or
-{
+})
+NPC_WEAPONS_RANDOM_EXPLOSIVE_LIST = table.Add(NPC_WEAPONS_RANDOM_EXPLOSIVE_LIST or {}, {
 	"swep_ai_grenadelauncher",
 	"swep_ai_hellfire",
 	"swep_ai_mgl",
 	"swep_ai_mrl",
 	"swep_ai_rocketlauncher",
-}
-npcWeaponsRandomMG = npcWeaponsRandomMG or
-{
+})
+NPC_WEAPONS_RANDOM_MACHINEGUN_LIST = table.Add(NPC_WEAPONS_RANDOM_MACHINEGUN_LIST or {}, {
 	"swep_ai_ar3",
 	"swep_ai_guardgun",
 	"swep_ai_m249",
 	"swep_ai_taucannon",
-}
-npcWeaponsRandomPistol = npcWeaponsRandomPistol or
-{
+})
+NPC_WEAPONS_RANDOM_PISTOL_LIST = table.Add(NPC_WEAPONS_RANDOM_PISTOL_LIST or {}, {
 	"swep_ai_automaticpistol",
 	"swep_ai_deagle",
 	"swep_ai_elite",
@@ -123,9 +74,8 @@ npcWeaponsRandomPistol = npcWeaponsRandomPistol or
 	"swep_ai_pistol",
 	"swep_ai_usp",
 	"swep_ai_usp_s",
-}
-npcWeaponsRandomRifle = npcWeaponsRandomRifle or
-{
+})
+NPC_WEAPONS_RANDOM_RIFLE_LIST = table.Add(NPC_WEAPONS_RANDOM_RIFLE_LIST or {}, {
 	"swep_ai_ak47",
 	"swep_ai_ar2",
 	"swep_ai_aug",
@@ -136,16 +86,14 @@ npcWeaponsRandomRifle = npcWeaponsRandomRifle or
 	"swep_ai_m4a1_s",
 	"swep_ai_oicw",
 	"swep_ai_sg552",
-}
-npcWeaponsRandomShotgun = npcWeaponsRandomShotgun or
-{
+})
+NPC_WEAPONS_RANDOM_SHOTGUN_LIST = table.Add(NPC_WEAPONS_RANDOM_SHOTGUN_LIST or {}, {
 	"swep_ai_doublebarrel",
 	"swep_ai_shotgun",
 	"swep_ai_m3",
 	"swep_ai_xm1014",
-}
-npcWeaponsRandomSMG = npcWeaponsRandomSMG or
-{
+})
+NPC_WEAPONS_RANDOM_SUBMACHINEGUN_LIST = table.Add(NPC_WEAPONS_RANDOM_SUBMACHINEGUN_LIST or {}, {
 	"swep_ai_mac10",
 	"swep_ai_mp5",
 	"swep_ai_p90",
@@ -154,9 +102,8 @@ npcWeaponsRandomSMG = npcWeaponsRandomSMG or
 	"swep_ai_smg3",
 	"swep_ai_tmp",
 	"swep_ai_ump45",
-}
-npcWeaponsRandomSniper = npcWeaponsRandomSniper or
-{
+})
+NPC_WEAPONS_RANDOM_SNIPER_LIST = table.Add(NPC_WEAPONS_RANDOM_SNIPER_LIST or {}, {
 	"swep_ai_annabelle",
 	"swep_ai_awp",
 	"swep_ai_crossbow",
@@ -164,9 +111,8 @@ npcWeaponsRandomSniper = npcWeaponsRandomSniper or
 	"swep_ai_scout",
 	"swep_ai_sg550",
 	"swep_ai_sniper",
-}
-npcWeaponsRandomHL2 = npcWeaponsRandomHL2 or
-{
+})
+NPC_WEAPONS_RANDOM_HL2_LIST = table.Add(NPC_WEAPONS_RANDOM_HL2_LIST or {}, {
 	"swep_ai_annabelle",
 	"swep_ai_ar2",
 	"swep_ai_ar3",
@@ -180,9 +126,8 @@ npcWeaponsRandomHL2 = npcWeaponsRandomHL2 or
 	"swep_ai_smg3",
 	"swep_ai_sniper",
 	"swep_ai_taucannon",
-}
-npcWeaponsRandomCSS = npcWeaponsRandomCSS or
-{
+})
+NPC_WEAPONS_RANDOM_CSS_LIST = table.Add(NPC_WEAPONS_RANDOM_CSS_LIST or {}, {
 	"swep_ai_ak47",
 	"swep_ai_aug",
 	"swep_ai_awp",
@@ -210,4 +155,4 @@ npcWeaponsRandomCSS = npcWeaponsRandomCSS or
 	"swep_ai_usp",
 	"swep_ai_usp_s",
 	"swep_ai_xm1014",
-}
+})
