@@ -177,6 +177,13 @@ function SWEP:Shoot()
 	
 	self:FireBullets(bulletInfo)
 	self:ShootEffects()
+
+	if self.ForceWalking then
+	
+		owner:SetMovementActivity(ACT_WALK)
+		self.ForceWalkingUntil = CurTime() + 1
+
+	end
 	
 	if not self.Primary.InfiniteAmmo then
 	
@@ -275,9 +282,10 @@ function SWEP:Think()
 	local owner = self:GetOwner()
 	if IsValid(owner) and owner:IsNPC() then
 
-		if self.ForceWalking then
-			
-			owner:SetMovementActivity(ACT_WALK)
+		local curtime = CurTime()
+		if self.ForceWalkingUntil and curtime > self.ForceWalkingUntil then
+
+			owner:SetMovementActivity(ACT_RUN)
 
 		end
 
@@ -301,7 +309,7 @@ function SWEP:Think()
 			
 			end
 			local enemyIsAlive = enemy:Health() > 0 and enemy:GetMaxHealth() > 0
-			if self:GetNextPrimaryFire() <= CurTime() and self:CanPrimaryFire() and enemyIsAlive and enemyVisible then
+			if self:GetNextPrimaryFire() <= curtime and self:CanPrimaryFire() and enemyIsAlive and enemyVisible then
 
 				self:PrimaryFire()
 			
