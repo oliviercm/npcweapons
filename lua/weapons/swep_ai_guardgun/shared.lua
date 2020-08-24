@@ -32,3 +32,4 @@ SWEP.Primary.Sound				= "swep_ai_guardgun_fire"
 SWEP.Primary.InfiniteAmmo		= true
 
 SWEP.ForceWalking				= true
+SWEP.ForceWalkingTime			= 0.1

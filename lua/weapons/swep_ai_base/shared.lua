@@ -49,6 +49,7 @@ SWEP.Primary.Ammo				= "pistol" --The ammo type of the weapon. This doesn't do a
 SWEP.Primary.InfiniteAmmo		= false --Should we never have to reload?
 
 SWEP.ForceWalking				= false --Should NPCs be forced to walk when holding this weapon?
+SWEP.ForceWalkingTime			= 0 --How long to force NPCs to walk after shooting.
 
 SWEP.LastEnemy					= nil --This value is used to store the owners last enemy, don't touch it.
 SWEP.LastActivity				= nil --This value is used to store the owners last activity, don't touch it.
@@ -181,7 +182,7 @@ function SWEP:Shoot()
 	if self.ForceWalking then
 	
 		owner:SetMovementActivity(ACT_WALK)
-		self.ForceWalkingUntil = CurTime() + 1
+		self.ForceWalkingUntil = CurTime() + self.ForceWalkingTime
 
 	end
 	
@@ -286,6 +287,7 @@ function SWEP:Think()
 		if self.ForceWalkingUntil and curtime > self.ForceWalkingUntil then
 
 			owner:SetMovementActivity(ACT_RUN)
+			self.ForceWalkingUntil = nil
 
 		end
 
