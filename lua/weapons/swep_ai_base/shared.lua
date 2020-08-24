@@ -126,7 +126,7 @@ function SWEP:Shoot()
 		local enemyClass = enemy:GetClass()
 		if self.AimForHeadTable[enemyClass] then
 	
-			if enemyClass == "npc_combine_s" then -- Special targeting for npc_combine_s because NPC:HeadTarget() doesn't return a good position when used on npc_combine_s
+			if enemyClass == "npc_combine_s" then -- Special logic for npc_combine_s because NPC:HeadTarget() doesn't return a good position when used on npc_combine_s
 	
 				local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
 				targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
