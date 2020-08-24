@@ -41,7 +41,7 @@ function ENT:PhysicsCollide(data, physobj)
 	
 	for k, v in pairs(ents.FindInSphere(projPos, radius)) do
 		
-		if IsValid(v) and v:GetPhysicsObject() and v:Visible(self) then
+		if IsValid(v) and v:GetPhysicsObject() and self:Visible(v) then
 			
 			local victimPos = v:WorldSpaceCenter()
 			local distance = projPos:Distance(victimPos)
@@ -71,12 +71,6 @@ function ENT:PhysicsCollide(data, physobj)
 		end
 		
 	end
-	
-	self:Remove()
-	
-end
-
-function ENT:OnRemove()
 
 	local effect = EffectData()
 	effect:SetStart(self:WorldSpaceCenter())
@@ -87,5 +81,6 @@ function ENT:OnRemove()
 	util.Effect("Explosion", effect)
 	
 	self:StopSound("ai_rocket_projectile_sound")
+	self:Remove()
 	
 end
