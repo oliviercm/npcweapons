@@ -10,6 +10,7 @@ SWEP.PrintName					= "NPC Weapon Base"
 SWEP.Author						= "xyzzy"
 SWEP.Contact					= "http://steamcommunity.com/id/theRealXyzzy/"
 SWEP.Category					= "NPC Weapons"
+SWEP.IsNPCWeapon				= true
 
 SWEP.WorldModel					= "models/weapons/w_pistol.mdl" --What model should we use as the world model?
 SWEP.HoldType					= "pistol" --Which animation set should we use? Note that most animations only differ on npc_citizen. [pistol - aim down sight while moving, pistol reload / smg - fire from hip while moving, smg reload / ar2 - aim down sight while moving, smg reload / shotgun - fire from hip while moving, shotgun reload / rpg - rpg idle, aim down sight while moving, smg reload]
@@ -76,6 +77,17 @@ function SWEP:Initialize()
 	
 		self:Think()
 		
+	end
+
+end
+
+function SWEP:Equip(owner)
+
+	local ownerClass = owner:GetClass()
+	if owner:IsPlayer() or ownerClass == "npc_vortigaunt" then
+
+		self:Remove()
+
 	end
 
 end
@@ -261,7 +273,7 @@ function SWEP:Think()
 	end)
 	
 	local owner = self:GetOwner()
-	if IsValid(owner) then
+	if IsValid(owner) and owner:IsNPC() then
 
 		if self.ForceWalking then
 			
@@ -300,13 +312,13 @@ function SWEP:Think()
 			self:SetNextPrimaryFireAimDelay()
 
 		end
+
+		if self:Clip1() <= 0 and not owner:IsCurrentSchedule(SCHED_RELOAD) and not owner:IsCurrentSchedule(SCHED_HIDE_AND_RELOAD) then
+	
+			owner:SetSchedule(SCHED_RELOAD)
 		
-	end
-	
-	if self:Clip1() <= 0 and not owner:IsCurrentSchedule(SCHED_RELOAD) and not owner:IsCurrentSchedule(SCHED_HIDE_AND_RELOAD) then
-	
-		owner:SetSchedule(SCHED_RELOAD)
-	
+		end
+		
 	end
 	
 end
@@ -380,3 +392,7 @@ end
 function SWEP:CanBePickedUpByNPCs()
 	return true
 end
+
+hook.Add("PlayerCanPickupWeapon", "NPCWeaponsDisallowPlayerPickup", function(ply, wep)
+    if (wep.IsNPCWeapon) then return false end
+end)
