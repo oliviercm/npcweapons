@@ -52,6 +52,22 @@ SWEP.ForceWalking				= false --Should NPCs be forced to walk when holding this w
 SWEP.LastEnemy					= nil --This value is used to store the owners last enemy, don't touch it.
 SWEP.LastActivity				= nil --This value is used to store the owners last activity, don't touch it.
 
+SWEP.AimForHeadTable			= {
+	npc_combine_s = true,
+	npc_citizen = true,
+	npc_alyx = true,
+	npc_barney = true,
+	npc_monk = true,
+	npc_eli = true,
+	npc_kleiner = true,
+	npc_magnusson = true,
+	npc_mossman = true,
+	npc_breen = true,
+	npc_metropolice = true,
+	npc_zombie = true,
+	npc_zombine = true,
+}
+
 function SWEP:Initialize()
 	
 	self:SetHoldType(self.HoldType)
@@ -108,7 +124,7 @@ function SWEP:Shoot()
 	else
 
 		local enemyClass = enemy:GetClass()
-		if swepAiBaseAimForHead[enemyClass] then
+		if self.AimForHeadTable[enemyClass] then
 	
 			if enemyClass == "npc_combine_s" then -- Special targeting for npc_combine_s because NPC:HeadTarget() doesn't return a good position when used on npc_combine_s
 	
