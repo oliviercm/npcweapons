@@ -33,7 +33,7 @@ SWEP.Primary.AimDelayMax			= NPC_WEAPONS_MAX_AIM_DELAY_HIGH
 SWEP.Primary.Sound					= "swep_ai_crossbow_fire"
 
 SWEP.ProjectileModel				= "models/crossbow_bolt.mdl"
-SWEP.ProjectileSpeed				= 3000
+SWEP.ProjectileSpeed				= 2400
 SWEP.ProjectileAcceleration			= 0
 SWEP.ProjectileDamageType			= DMG_GENERIC
 SWEP.ProjectileHitEffect			= "cball_bounce"
