@@ -1,4 +1,4 @@
-NPC_WEAPONS_RANDOM_ALL_LIST = table.Add(NPC_WEAPONS_RANDOM_ALL_LIST or {}, {
+NPC_WEAPONS_RANDOM_ALL_LIST = table.Inherit(NPC_WEAPONS_RANDOM_ALL_LIST or {}, {
 	"swep_ai_ak47",
 	"swep_ai_annabelle",
 	"swep_ai_ar2",
@@ -49,20 +49,20 @@ NPC_WEAPONS_RANDOM_ALL_LIST = table.Add(NPC_WEAPONS_RANDOM_ALL_LIST or {}, {
 	"swep_ai_usp_s",
 	"swep_ai_xm1014",
 })
-NPC_WEAPONS_RANDOM_EXPLOSIVE_LIST = table.Add(NPC_WEAPONS_RANDOM_EXPLOSIVE_LIST or {}, {
+NPC_WEAPONS_RANDOM_EXPLOSIVE_LIST = table.Inherit(NPC_WEAPONS_RANDOM_EXPLOSIVE_LIST or {}, {
 	"swep_ai_grenadelauncher",
 	"swep_ai_hellfire",
 	"swep_ai_mgl",
 	"swep_ai_mrl",
 	"swep_ai_rocketlauncher",
 })
-NPC_WEAPONS_RANDOM_MACHINEGUN_LIST = table.Add(NPC_WEAPONS_RANDOM_MACHINEGUN_LIST or {}, {
+NPC_WEAPONS_RANDOM_MG_LIST = table.Inherit(NPC_WEAPONS_RANDOM_MG_LIST or {}, {
 	"swep_ai_ar3",
 	"swep_ai_guardgun",
 	"swep_ai_m249",
 	"swep_ai_taucannon",
 })
-NPC_WEAPONS_RANDOM_PISTOL_LIST = table.Add(NPC_WEAPONS_RANDOM_PISTOL_LIST or {}, {
+NPC_WEAPONS_RANDOM_PISTOL_LIST = table.Inherit(NPC_WEAPONS_RANDOM_PISTOL_LIST or {}, {
 	"swep_ai_automaticpistol",
 	"swep_ai_deagle",
 	"swep_ai_elite",
@@ -75,7 +75,7 @@ NPC_WEAPONS_RANDOM_PISTOL_LIST = table.Add(NPC_WEAPONS_RANDOM_PISTOL_LIST or {},
 	"swep_ai_usp",
 	"swep_ai_usp_s",
 })
-NPC_WEAPONS_RANDOM_RIFLE_LIST = table.Add(NPC_WEAPONS_RANDOM_RIFLE_LIST or {}, {
+NPC_WEAPONS_RANDOM_RIFLE_LIST = table.Inherit(NPC_WEAPONS_RANDOM_RIFLE_LIST or {}, {
 	"swep_ai_ak47",
 	"swep_ai_ar2",
 	"swep_ai_aug",
@@ -87,13 +87,13 @@ NPC_WEAPONS_RANDOM_RIFLE_LIST = table.Add(NPC_WEAPONS_RANDOM_RIFLE_LIST or {}, {
 	"swep_ai_oicw",
 	"swep_ai_sg552",
 })
-NPC_WEAPONS_RANDOM_SHOTGUN_LIST = table.Add(NPC_WEAPONS_RANDOM_SHOTGUN_LIST or {}, {
+NPC_WEAPONS_RANDOM_SHOTGUN_LIST = table.Inherit(NPC_WEAPONS_RANDOM_SHOTGUN_LIST or {}, {
 	"swep_ai_doublebarrel",
 	"swep_ai_shotgun",
 	"swep_ai_m3",
 	"swep_ai_xm1014",
 })
-NPC_WEAPONS_RANDOM_SUBMACHINEGUN_LIST = table.Add(NPC_WEAPONS_RANDOM_SUBMACHINEGUN_LIST or {}, {
+NPC_WEAPONS_RANDOM_SMG_LIST = table.Inherit(NPC_WEAPONS_RANDOM_SMG_LIST or {}, {
 	"swep_ai_mac10",
 	"swep_ai_mp5",
 	"swep_ai_p90",
@@ -103,7 +103,7 @@ NPC_WEAPONS_RANDOM_SUBMACHINEGUN_LIST = table.Add(NPC_WEAPONS_RANDOM_SUBMACHINEG
 	"swep_ai_tmp",
 	"swep_ai_ump45",
 })
-NPC_WEAPONS_RANDOM_SNIPER_LIST = table.Add(NPC_WEAPONS_RANDOM_SNIPER_LIST or {}, {
+NPC_WEAPONS_RANDOM_SNIPER_LIST = table.Inherit(NPC_WEAPONS_RANDOM_SNIPER_LIST or {}, {
 	"swep_ai_annabelle",
 	"swep_ai_awp",
 	"swep_ai_crossbow",
@@ -112,7 +112,7 @@ NPC_WEAPONS_RANDOM_SNIPER_LIST = table.Add(NPC_WEAPONS_RANDOM_SNIPER_LIST or {},
 	"swep_ai_sg550",
 	"swep_ai_sniper",
 })
-NPC_WEAPONS_RANDOM_HL2_LIST = table.Add(NPC_WEAPONS_RANDOM_HL2_LIST or {}, {
+NPC_WEAPONS_RANDOM_HL2_LIST = table.Inherit(NPC_WEAPONS_RANDOM_HL2_LIST or {}, {
 	"swep_ai_annabelle",
 	"swep_ai_ar2",
 	"swep_ai_ar3",
@@ -127,7 +127,7 @@ NPC_WEAPONS_RANDOM_HL2_LIST = table.Add(NPC_WEAPONS_RANDOM_HL2_LIST or {}, {
 	"swep_ai_sniper",
 	"swep_ai_taucannon",
 })
-NPC_WEAPONS_RANDOM_CSS_LIST = table.Add(NPC_WEAPONS_RANDOM_CSS_LIST or {}, {
+NPC_WEAPONS_RANDOM_CSS_LIST = table.Inherit(NPC_WEAPONS_RANDOM_CSS_LIST or {}, {
 	"swep_ai_ak47",
 	"swep_ai_aug",
 	"swep_ai_awp",
