@@ -10,7 +10,7 @@ SWEP.HoldType					= "pistol"
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "ShellEject"
 SWEP.TracerEffect				= "Tracer"
-SWEP.ReloadSounds				= {{0, "swep_ai_fiveseven_reload_1"}, {0.6, "swep_ai_fiveseven_reload_2"}, {1.2, "swep_ai_fiveseven_reload_3"}, {1.6, "swep_ai_fiveseven_reload_4"}}
+SWEP.ReloadSounds				= {{0, "swep_ai_fiveseven_reload_1"}, {0.2, "swep_ai_fiveseven_reload_2"}, {0.6, "swep_ai_fiveseven_reload_3"}, {1.6, "swep_ai_fiveseven_reload_4"}}
 
 SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_LOW
 SWEP.Primary.DamageMin			= 4
