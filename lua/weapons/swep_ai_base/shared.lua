@@ -23,6 +23,7 @@ SWEP.ShellEffect				= "ShellEject" --Which effect to use as the bullet casing.
 SWEP.TracerEffect				= "Tracer" --Which effect to use as the bullet tracer.
 SWEP.ReloadSounds				= nil --Which sounds should we play when the gun is being reloaded? Should be a matrix of {delay, sound}, eg. {{0, "ak47_clipout"}, {0.8, "ak47_clipin"}}
 SWEP.TracerX					= 1 --For every X bullets, show the tracer effect.
+SWEP.EnableTracerEffect    		= true --Enable tracer?
 SWEP.EnableMuzzleEffect    		= true --Enable muzzleflash?
 SWEP.EnableShellEffect    		= true --Enable shell casings?
 
@@ -195,7 +196,7 @@ function SWEP:Shoot(forceTargetPos)
 	bulletInfo.Force  = self.Primary.Force
 	bulletInfo.Num = self.Primary.NumBullets
 	bulletInfo.Tracer = self.TracerX
-	bulletInfo.TracerName = self.TracerEffect
+	bulletInfo.TracerName = self.EnableTracerEffect and self.TracerEffect or ""
 	bulletInfo.AmmoType = self.Primary.Ammo
 	bulletInfo.Dir = direction
 	bulletInfo.Spread = Vector(spread, spread, 0)
