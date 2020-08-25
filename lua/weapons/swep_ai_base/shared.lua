@@ -48,12 +48,14 @@ SWEP.Primary.AimDelayMax		= 0 --How long should we wait before shooting a new en
 SWEP.Primary.Sound				= "weapons/pistol/pistol_fire2.wav" --What sound should we play when the gun fires?
 SWEP.Primary.Ammo				= "pistol" --The ammo type of the weapon. This doesn't do anything at the moment, but if picking up these guns is ever implemented then this is the ammo type that you would get.
 SWEP.Primary.InfiniteAmmo		= false --Should we never have to reload?
+SWEP.Primary.FullBurst			= false --Do bursts have to fire the full burst, or can they stop early?
 
 SWEP.ForceWalking				= false --Should NPCs be forced to walk when holding this weapon?
 SWEP.ForceWalkingTime			= 0 --How long to force NPCs to walk after shooting.
 
 SWEP.LastEnemy					= nil --This value is used to store the owners last enemy, don't touch it.
 SWEP.LastActivity				= nil --This value is used to store the owners last activity, don't touch it.
+SWEP.LastTargetPos				= nil --This value is used to store the last shot position, don't touch it.
 
 SWEP.AimForHeadTable			= {
 	npc_combine_s = true,
@@ -115,7 +117,15 @@ function SWEP:PrimaryFire()
 
 			local owner = self:GetOwner()
 			if not IsValid(owner) or not self:CanPrimaryFire() or not owner:GetEnemy() or owner:GetEnemy() ~= currentEnemy then
+				
+				if self.Primary.FullBurst and self.LastTargetPos and self:CanPrimaryFire() then
+
+					self:Shoot(self.LastTargetPos)
+
+				end
+
 				return
+
 			end
 
 			self:Shoot()
@@ -128,42 +138,48 @@ function SWEP:PrimaryFire()
 	
 end
 
-function SWEP:Shoot()
+function SWEP:Shoot(forceTargetPos)
 
 	local owner = self:GetOwner()
 	local enemy = owner:GetEnemy()
 
-	local muzzlePos = owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
-	local targetPos = nil
+	local muzzlePos = IsValid(enemy) and owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
+	local targetPos = forceTargetPos
 	
-	if enemy:IsPlayer() then
+	if not targetPos then
 
-		local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
-		targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+		if enemy:IsPlayer() then
 
-	else
+			local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
+			targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
 
-		local enemyClass = enemy:GetClass()
-		if self.AimForHeadTable[enemyClass] then
-	
-			if enemyClass == "npc_combine_s" then -- Special logic for npc_combine_s because NPC:HeadTarget() doesn't return a good position when used on npc_combine_s
-	
-				local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
-				targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
-	
-			else
-	
-				targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
-	
-			end
-	
 		else
-	
-			targetPos = enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
-	
+
+			local enemyClass = enemy:GetClass()
+			if self.AimForHeadTable[enemyClass] then
+		
+				if enemyClass == "npc_combine_s" then -- Special logic for npc_combine_s because NPC:HeadTarget() doesn't return a good position when used on npc_combine_s
+		
+					local headBone = enemy:LookupBone("ValveBiped.Bip01_Head1")
+					targetPos = (headBone and enemy:GetBonePosition(headBone)) or enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+		
+				else
+		
+					targetPos = enemy:HeadTarget(muzzlePos) or enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+		
+				end
+		
+			else
+		
+				targetPos = enemy:BodyTarget(muzzlePos) or enemy:WorldSpaceCenter()
+		
+			end
+
 		end
 
 	end
+
+	self.LastTargetPos = targetPos
 	
 	debugoverlay.Cross(targetPos, 3, 1, Color(255,0,0), true)
 	
