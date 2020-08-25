@@ -501,7 +501,7 @@ function SWEP:OnRemove()
 			
 			if IsValid(self) then
 
-				self:CreateCSModel()
+				self:CreateClientModel()
 
 			end
 
