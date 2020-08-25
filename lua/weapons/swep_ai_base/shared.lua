@@ -256,7 +256,7 @@ end
 
 function SWEP:ShootEffects()
 	
-	self:EmitSound(self.Primary.Sound)
+	self:EmitSound(type(self.Primary.Sound) == "string" and self.Primary.Sound or self.Primary.Sound[math.random(#self.Primary.Sound)])
 	
 	if self.EnableMuzzleEffect then
 	
