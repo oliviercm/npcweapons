@@ -479,7 +479,7 @@ end
 
 function SWEP:CreateClientModel()
 		
-	if !IsValid(self.ClientModelEnt) then
+	if !IsValid(self.ClientModelEnt) and IsValid(self.ClientModel) and IsValid(self.ClientModel.model) then
 
 		self.ClientModelEnt = ClientsideModel(self.ClientModel.model, RENDERGROUP_OPAQUE)
 		self.ClientModelEnt:SetPos(self:GetPos())
