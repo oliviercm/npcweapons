@@ -468,11 +468,7 @@ function SWEP:DrawWorldModel()
 	
 	for k, v in pairs(self.ClientModel.bodygroup or {}) do
 
-		if model:GetBodygroup(k) != self.ClientModel then
-
-			model:SetBodygroup(k, self.ClientModel)
-
-		end
+		model:SetBodygroup(k, v)
 
 	end
 	
