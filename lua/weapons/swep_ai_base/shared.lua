@@ -116,9 +116,11 @@ function SWEP:PrimaryFire()
 			if not IsValid(self) then return end
 
 			local owner = self:GetOwner()
-			if not IsValid(owner) or not self:CanPrimaryFire() or not owner:GetEnemy() or owner:GetEnemy() ~= currentEnemy then
-				
-				if not self.Primary.BurstCancellable and self.LastTargetPos and self:CanPrimaryFire() then
+			if not IsValid(owner) then return end
+			if not self:CanPrimaryFire() then return end
+			if not owner:GetEnemy() or owner:GetEnemy() ~= currentEnemy then
+
+				if not self.Primary.BurstCancellable and self.LastTargetPos then
 
 					self:Shoot(self.LastTargetPos)
 
@@ -230,6 +232,22 @@ function SWEP:FireBulletsCallback(tr, dmgInfo)
 	else
 
 		dmgInfo:ScaleDamage(0)
+
+	end
+
+	for _, shootEffect in ipairs(weapon.ExtraShootEffects or {}) do
+
+		local effect = EffectData()
+		effect:SetEntity(weapon)
+		effect:SetStart(tr.HitPos)
+		effect:SetOrigin(tr.HitPos)
+		effect:SetNormal(tr.HitNormal)
+		effect:SetAngles(tr.HitNormal:Angle())
+		effect:SetScale(shootEffect.Scale or 1)
+		effect:SetMagnitude(shootEffect.Magnitude or 1)
+		effect:SetRadius(shootEffect.Radius or 1)
+		effect:SetAttachment(weapon.MuzzleAttachment)
+		util.Effect(shootEffect.EffectName or "", effect)
 
 	end
 
