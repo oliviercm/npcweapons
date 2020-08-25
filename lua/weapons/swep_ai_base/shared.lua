@@ -13,6 +13,7 @@ SWEP.Category					= "NPC Weapons"
 SWEP.IsNPCWeapon				= true
 
 SWEP.WorldModel					= "models/weapons/w_pistol.mdl" --What model should we use as the world model?
+SWEP.ClientModel				= nil --Structure used to render clientside models. The world model is not drawn if a client model exists. { model : String, pos : Vector, angle : Angle, size : Vector, color : Color, skin : Number, bodygroup : Table, bone : String }
 SWEP.HoldType					= "pistol" --Which animation set should we use? Note that most animations only differ on npc_citizen. [pistol - aim down sight while moving, pistol reload / smg - fire from hip while moving, smg reload / ar2 - aim down sight while moving, smg reload / shotgun - fire from hip while moving, shotgun reload / rpg - rpg idle, aim down sight while moving, smg reload]
 
 SWEP.MuzzleAttachment			= "1" --Where the muzzleflash and bullet should come out of on the weapon. Most models have this as 1 or "muzzle".
@@ -78,6 +79,12 @@ function SWEP:Initialize()
 	
 		self:Think()
 		
+	end
+
+	if CLIENT and self.ClientModel then
+
+		self:CreateClientModel()
+			
 	end
 
 end
@@ -383,6 +390,87 @@ function SWEP:SetNextPrimaryFireAimDelay()
 
 end
 
+function SWEP:DrawWorldModel()
+
+	local owner = self:GetOwner()
+	if not self.ClientModel or not IsValid(owner) then
+
+		self:DrawModel()
+		return
+
+	end
+
+	local pos, ang = self:GetBoneOrientation(self.ClientModel.bone or "ValveBiped.Bip01_R_Hand", owner)
+	if !pos then
+
+		return
+
+	end
+	
+	local model = self.ClientModelEnt
+	if not IsValid(model) then
+		
+		return
+	
+	end
+	
+	model:SetPos(pos + ang:Forward() * self.ClientModel.pos.x + ang:Right() * self.ClientModel.pos.y + ang:Up() * self.ClientModel.pos.z)
+
+	ang:RotateAroundAxis(ang:Up(), self.ClientModel.angle.y)
+	ang:RotateAroundAxis(ang:Right(), self.ClientModel.angle.p)
+	ang:RotateAroundAxis(ang:Forward(), self.ClientModel.angle.r)
+	model:SetAngles(ang)
+	
+	local matrix = Matrix()
+	matrix:Scale(self.ClientModel.size or Vector(1, 1, 1))
+	model:EnableMatrix("RenderMultiply", matrix)
+	
+	if self.ClientModel.skin and self.ClientModel.skin ~= model:GetSkin() then
+
+		model:SetSkin(self.ClientModel.skin)
+
+	end
+	
+	for k, v in pairs(self.ClientModel.bodygroup or {}) do
+
+		if model:GetBodygroup(k) != self.ClientModel then
+
+			model:SetBodygroup(k, self.ClientModel)
+
+		end
+
+	end
+	
+	render.SetColorModulation(self.ClientModel.color.r / 255, self.ClientModel.color.g / 255, self.ClientModel.color.b / 255)
+	render.SetBlend(self.ClientModel.color.a / 255)
+	
+end
+
+function SWEP:CreateClientModel()
+		
+	if !IsValid(self.ClientModelEnt) then
+
+		self.ClientModelEnt = ClientsideModel(self.ClientModel.model, RENDERGROUP_OPAQUE)
+		self.ClientModelEnt:SetPos(self:GetPos())
+		self.ClientModelEnt:SetAngles(self:GetAngles())
+		self.ClientModelEnt:SetParent(self)
+		
+	end
+	
+end
+
+function SWEP:GetBoneOrientation(boneName, ent)
+
+	local bone = ent:LookupBone(boneName)
+	local matrix = bone and ent:GetBoneMatrix(bone) or nil
+	if matrix then
+
+		return matrix:GetTranslation(), matrix:GetAngles()
+
+	end
+
+end
+
 function SWEP:GetCapabilities()
 	return 0 --Prevents weapons from firing animation events (e.g. built-in HL2 guns muzzleflash & shell casings)
 end
@@ -397,6 +485,30 @@ end
 
 function SWEP:OnDrop()
 	self:Remove()
+end
+
+function SWEP:OnRemove()
+
+	if CLIENT then
+
+		if self.ClientModelEnt then
+
+			self.ClientModelEnt:Remove()
+
+		end
+
+		timer.Simple(0, function()
+			
+			if IsValid(self) then
+
+				self:CreateCSModel()
+
+			end
+
+		end)
+
+	end
+
 end
 
 function SWEP:CanBePickedUpByNPCs()
