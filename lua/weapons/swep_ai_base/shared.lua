@@ -39,6 +39,7 @@ SWEP.Primary.BurstMinShots		= 0 --How many times should we shoot in every burst,
 SWEP.Primary.BurstMaxShots		= 0 --How many times should we shoot in every burst, at maximum?
 SWEP.Primary.BurstMinDelay		= 0 --How much extra time should we wait between bursts, at minimum?
 SWEP.Primary.BurstMaxDelay		= 0 --How much extra time should we wait between bursts, at maximum?
+SWEP.Primary.BurstCancellable	= true --Do bursts have to fire the full burst, or can they stop early?
 SWEP.Primary.FireDelay			= 0 --How much time should there be between each shot?
 SWEP.Primary.NumBullets			= 0 --How many bullets should there be for each shot? Most weapons would have this as 1, but shotguns would have a different value, like 8 or 9.
 SWEP.Primary.ClipSize			= 0 --How many shots should we get per reload?
@@ -48,7 +49,6 @@ SWEP.Primary.AimDelayMax		= 0 --How long should we wait before shooting a new en
 SWEP.Primary.Sound				= "weapons/pistol/pistol_fire2.wav" --What sound should we play when the gun fires?
 SWEP.Primary.Ammo				= "pistol" --The ammo type of the weapon. This doesn't do anything at the moment, but if picking up these guns is ever implemented then this is the ammo type that you would get.
 SWEP.Primary.InfiniteAmmo		= false --Should we never have to reload?
-SWEP.Primary.FullBurst			= false --Do bursts have to fire the full burst, or can they stop early?
 
 SWEP.ForceWalking				= false --Should NPCs be forced to walk when holding this weapon?
 SWEP.ForceWalkingTime			= 0 --How long to force NPCs to walk after shooting.
@@ -118,7 +118,7 @@ function SWEP:PrimaryFire()
 			local owner = self:GetOwner()
 			if not IsValid(owner) or not self:CanPrimaryFire() or not owner:GetEnemy() or owner:GetEnemy() ~= currentEnemy then
 				
-				if self.Primary.FullBurst and self.LastTargetPos and self:CanPrimaryFire() then
+				if not self.Primary.BurstCancellable and self.LastTargetPos and self:CanPrimaryFire() then
 
 					self:Shoot(self.LastTargetPos)
 
@@ -407,7 +407,7 @@ function SWEP:SetNextPrimaryFireAimDelay()
 end
 
 function SWEP:DrawWorldModel()
-
+	--self:DrawModel()
 	local owner = self:GetOwner()
 	if not self.ClientModel or not IsValid(owner) then
 

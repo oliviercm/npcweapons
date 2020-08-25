@@ -24,6 +24,7 @@ SWEP.Primary.BurstMinShots		= 3
 SWEP.Primary.BurstMaxShots		= 3
 SWEP.Primary.BurstMinDelay		= 0.42
 SWEP.Primary.BurstMaxDelay		= 0.56
+SWEP.Primary.BurstCancellable	= false
 SWEP.Primary.FireDelay			= 0.07
 SWEP.Primary.NumBullets			= 1
 SWEP.Primary.ClipSize			= 24
