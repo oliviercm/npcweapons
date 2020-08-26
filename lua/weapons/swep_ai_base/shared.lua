@@ -2,7 +2,7 @@
 --////Author: xyzzy
 --////////////////////////////////////////////////////////////////////////////////
 --////This is the base for my NPC weapons.
---////If you want to learn from or use parts of my code, please credit me.
+--////Do not re-upload any part of this addon without my permission.
 --////Check other weapons in this pack for examples on how to create your own weapons using this base.
 --////////////////////////////////////////////////////////////////////////////////
 
