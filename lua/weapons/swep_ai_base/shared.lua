@@ -3,7 +3,7 @@
 --////////////////////////////////////////////////////////////////////////////////
 --////This is the base for my NPC weapons.
 --////Do not re-upload any part of this addon without my permission.
---////Check other weapons in this pack for examples on how to create your own weapons using this base.
+--////The main content pack using this base is here: https://steamcommunity.com/sharedfiles/filedetails/?id=632126535
 --////////////////////////////////////////////////////////////////////////////////
 
 SWEP.PrintName					= "NPC Weapon Base"
