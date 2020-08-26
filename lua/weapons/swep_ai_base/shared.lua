@@ -426,7 +426,7 @@ function SWEP:SetNextPrimaryFireAimDelay()
 end
 
 function SWEP:DrawWorldModel()
-	--self:DrawModel()
+
 	local owner = self:GetOwner()
 	if not self.ClientModel or not IsValid(owner) then
 
