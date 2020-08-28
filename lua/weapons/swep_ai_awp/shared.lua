@@ -9,6 +9,7 @@ SWEP.HoldType					= "ar2"
 
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "RifleShellEject"
+SWEP.ShellEffectDelay			= 0.8
 SWEP.TracerEffect				= "Tracer"
 SWEP.ReloadSounds				= {{0.4, "swep_ai_awp_reload_1"}, {1.6, "swep_ai_awp_reload_2"}, {2, "swep_ai_awp_reload_3"}, {2.4, "swep_ai_awp_reload_3"}}
 
@@ -31,58 +32,4 @@ SWEP.Primary.DefaultClip		= 10
 SWEP.Primary.AimDelayMin		= NPC_WEAPONS_MIN_AIM_DELAY_HIGH
 SWEP.Primary.AimDelayMax		= NPC_WEAPONS_MAX_AIM_DELAY_HIGH
 SWEP.Primary.Sound				= "swep_ai_awp_fire"
-SWEP.Primary.BoltSound			= "swep_ai_awp_bolt"
-
-function SWEP:ShootEffects()
-	
-	self:EmitSound(self.Primary.Sound)
-
-	timer.Simple(0.8, function()
-
-		if IsValid(self) and IsValid(self:GetOwner()) then
-
-			local ownerActivity = self:GetOwner():GetActivity()
-			if ownerActivity ~= ACT_RELOAD then
-				sound.Play(self.Primary.BoltSound, self:GetPos(), SNDLVL_NORM)
-			end
-			
-			timer.Simple(0.333, function()
-
-				if IsValid(self) and IsValid(self:GetOwner()) then
-
-					local ownerActivity = self:GetOwner():GetActivity()
-					if ownerActivity ~= ACT_RELOAD then
-						sound.Play(self.Primary.BoltSound, self:GetPos(), SNDLVL_NORM)
-					end
-
-				end
-				
-			end)
-			
-			local shellEffect = EffectData()
-			local shellAttach = self:GetAttachment(self.ShellAttachment)
-			shellEffect:SetEntity(self)
-			shellEffect:SetOrigin(shellAttach.Pos)
-			shellEffect:SetAngles(shellAttach.Ang)
-			shellEffect:SetScale(1)
-			shellEffect:SetMagnitude(1)
-			shellEffect:SetRadius(1)
-			util.Effect(self.ShellEffect, shellEffect)
-
-		end
-
-	end)
-
-	local muzzleEffect = EffectData()
-	local muzzleAttach = self:GetAttachment(self.MuzzleAttachment)
-	muzzleEffect:SetEntity(self)
-	muzzleEffect:SetOrigin(muzzleAttach.Pos)
-	muzzleEffect:SetAngles(muzzleAttach.Ang)
-	muzzleEffect:SetScale(1)
-	muzzleEffect:SetMagnitude(1)
-	muzzleEffect:SetRadius(1)
-	util.Effect(self.MuzzleEffect, muzzleEffect)
-	
-	self:GetOwner():MuzzleFlash()
-
-end
+SWEP.Primary.ExtraSounds		= {{0.8, "swep_ai_awp_bolt"}, {1.13, "swep_ai_awp_bolt"}}
