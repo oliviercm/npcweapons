@@ -12,6 +12,7 @@ SWEP.ShellEffect				= ""
 SWEP.TracerEffect				= ""
 SWEP.ShowShellEffect    		= false
 SWEP.ReloadSounds				= {{2.0, "swep_ai_automaticpistol_cock"}}
+SWEP.ImpactDecal				= "Scorch"
 
 SWEP.ReloadTime					= NPC_WEAPONS_RELOAD_TIME_HIGH
 
