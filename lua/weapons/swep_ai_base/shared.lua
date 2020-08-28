@@ -155,7 +155,7 @@ function SWEP:Shoot(forceTargetPos)
 	local owner = self:GetOwner()
 	local enemy = owner:GetEnemy()
 
-	local muzzlePos = IsValid(enemy) and owner:GetPos():Distance(enemy:GetPos()) > 128 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
+	local muzzlePos = IsValid(enemy) and owner:GetPos():DistToSqr(enemy:GetPos()) > 16384 and self:GetAttachment(self.MuzzleAttachment).Pos or owner:WorldSpaceCenter()
 	local targetPos = forceTargetPos
 	
 	if not targetPos then
@@ -191,8 +191,13 @@ function SWEP:Shoot(forceTargetPos)
 	end
 
 	self.LastTargetPos = targetPos
-	
-	debugoverlay.Cross(targetPos, 3, 1, Color(255, 0, 0), true)
+
+	if GetConVar("developer"):GetBool() then
+
+		debugoverlay.Cross(muzzlePos, 3, 1, Color(0, 0, 255), true)
+		debugoverlay.Cross(targetPos, 3, 1, Color(255, 0, 0), true)
+
+	end
 	
 	local direction = (targetPos - muzzlePos):GetNormalized()
 	local spread = owner:IsMoving() and self.Primary.Spread * self.Primary.SpreadMoveMult or self.Primary.Spread
@@ -257,6 +262,12 @@ function SWEP:FireBulletsCallback(tr, dmgInfo)
 	if weapon.ImpactDecal then
 
 		util.Decal(weapon.ImpactDecal, tr.HitPos + tr.HitNormal, tr.HitPos - tr.HitNormal)
+
+	end
+
+	if GetConVar("developer"):GetBool() then
+
+		debugoverlay.Text(tr.HitPos, "DISTANCE: "..math.Round(distance).." MULTIPLIER: "..math.Round(dropoff, 2).." DAMAGE: "..math.Round(dmgInfo:GetDamage()))
 
 	end
 
