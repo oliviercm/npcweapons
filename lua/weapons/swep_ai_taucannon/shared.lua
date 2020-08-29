@@ -12,6 +12,7 @@ SWEP.ShellEffect				= ""
 SWEP.TracerEffect				= "ToolTracer"
 SWEP.EnableShellEffect			= false
 
+SWEP.Primary.DamageType         = DMG_ENERGYBEAM + DMG_DISSOLVE
 SWEP.Primary.DamageMin			= 10
 SWEP.Primary.DamageMax			= 20
 SWEP.Primary.MinDropoffDistance	= NPC_WEAPONS_MIN_DROPOFF_DISTANCE_RIFLE
