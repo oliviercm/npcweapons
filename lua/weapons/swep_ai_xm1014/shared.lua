@@ -9,6 +9,7 @@ SWEP.HoldType					= "shotgun"
 
 SWEP.MuzzleEffect    			= "MuzzleEffect"
 SWEP.ShellEffect				= "ShotgunShellEject"
+SWEP.ShellEffectDirection		= -1
 SWEP.TracerEffect				= "Tracer"
 SWEP.ReloadSounds				= {{0.6, "swep_ai_xm1014_reload_1"}}
 

@@ -59,6 +59,7 @@ SWEP.MuzzleEffectMagnitude    	= 1 --Muzzle effect magnitude.
 SWEP.EnableShellEffect    		= true --Enable shell casings?
 SWEP.ShellAttachment			= "2" --Where the bullet casing should come out of on the weapon. Most models have this as 2.
 SWEP.ShellEffect				= "ShellEject" --Which effect to use as the bullet casing.
+SWEP.ShellEffectDirection       = 1
 SWEP.ShellEffectScale    		= 1 --Shell effect scale.
 SWEP.ShellEffectRadius    		= 1 --Shell effect radius.
 SWEP.ShellEffectMagnitude    	= 1 --Shell effect magnitude.
@@ -456,8 +457,8 @@ function SWEP:ShootEffects()
                 local shellEffect = EffectData()
                 local shellAttach = self:GetAttachment(self.ShellAttachment or 2)
                 local shellPos = shellAttach and shellAttach.Pos or self:GetPos()
-                local shellForward = shellAttach and shellAttach.Ang:Forward() or self:GetForward()
-                local shellAngles = shellAttach and shellAttach.Ang or self:GetAngles()
+                local shellForward = shellAttach and shellAttach.Ang:Forward() * self.ShellEffectDirection or self:GetForward()
+                local shellAngles = shellAttach and shellAttach.Ang * self.ShellEffectDirection or self:GetAngles()
                 shellEffect:SetEntity(self)
                 shellEffect:SetStart(shellPos)
                 shellEffect:SetOrigin(shellPos)
